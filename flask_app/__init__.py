@@ -1,3 +1,3 @@
-from flask import Flask # type: ignore
+from flask import Flask 
 app = Flask(__name__)
-app.secret_key = " --New Text Here --"
+app.secret_key = "12345ABCDEF"
