@@ -35,3 +35,16 @@ class Friend:
         if len(result) < 1:
             return False
         return cls(result[0])
+
+
+# This method is going to be used to add a friend to a specifc user id. So the idea is that the query will add the session user_id to the friend table, thus creating that relationship.
+    @classmethod
+    def add_friend(cls, friend_id, session_id)
+        data = {
+            "id" : friend_id,
+            "user_id" : session_id
+            }
+        query = """INSERT INTO friends
+        (user_id) VALUES (%(user_id)s) WHERE id = %(id)s;"""
+        add_friend_id = connectToMySQL(db).query_db(query, data)
+        return add_friend_id

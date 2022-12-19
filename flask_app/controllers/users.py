@@ -10,6 +10,7 @@ from flask_app.models.Friend import Friend
 @app.route('/')
 def home():
     return render_template('Login_Page.html')
+
     
 @app.route('/register')
 def register():
@@ -46,6 +47,7 @@ def dashboard():
     events = Event.get_all_events()
     status = Status.get_all_statuses()
     return render_template('dashboard.html', user=user, events=events, status=status)
+
 
 ### POST METHODS ###
 

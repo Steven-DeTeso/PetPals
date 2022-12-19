@@ -55,7 +55,7 @@ class User:
         return cls(result[0])
 
     @classmethod
-    def update_user_account(cls, user_dict, session_id):
+    def update_user_account(cls, user_dict):
         if not cls.valid_user_update(user_dict):
             return False
         query = "UPDATE users SET first_name = %(first_name)s, last_name = %(last_name)s, email = %(email)s WHERE id = %(id)s;"
