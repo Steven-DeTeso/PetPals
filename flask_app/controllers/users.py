@@ -9,7 +9,7 @@ from flask_app.models.Friend import Friend
 
 @app.route('/')
 def home():
-    return render_template('Login_Page.HTML')
+    return render_template('Login_Page.html')
     
 @app.route('/register')
 def register():
