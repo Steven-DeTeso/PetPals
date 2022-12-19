@@ -36,6 +36,7 @@
     </nav>
     <div>
         <img src="" alt="">
+        <h3>{{user.first_name}}{{user.last_name}}'s Profile</h3>
         <div class="form-group">
             <textarea type="text" name="status" class="form-control">Say something...</textarea>
         </div>
@@ -43,16 +44,8 @@
         <a href="/">Create an Event</a>
     </div>
     <div>
-        <h3>Statuses and Events Feed</h3>
-        <img src="" alt="">
-        {% for status in statuses %}
-        <p>{{status.friend.name}} says...</p><br>
-            {{% if event == friend.event %}}
-        <p>{{friend.event}}</p>
-        {% else %}
-        <p>{{friend.status}}</p>
-        {% endif %}
-        {% endfor %}
+        
+    </div>
     </div>
 </body>
 </html>
