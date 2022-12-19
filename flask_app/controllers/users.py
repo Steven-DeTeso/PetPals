@@ -48,6 +48,14 @@ def dashboard():
     status = Status.get_all_statuses()
     return render_template('dashboard.html', user=user, events=events, status=status)
 
+@app.route('/profile')
+def render_profile():
+    if 'user_id' not in session:
+        flash("You must be logged in to edit a user's account.")
+        return redirect('/')
+    user = User.get_by_id(session['user_id'])
+    return render_template('profile.html', user=user)
+
 
 ### POST METHODS ###
 

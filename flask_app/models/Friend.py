@@ -39,7 +39,7 @@ class Friend:
 
 # This method is going to be used to add a friend to a specifc user id. So the idea is that the query will add the session user_id to the friend table, thus creating that relationship.
     @classmethod
-    def add_friend(cls, friend_id, session_id)
+    def add_friend(cls, friend_id, session_id):
         data = {
             "id" : friend_id,
             "user_id" : session_id

@@ -81,12 +81,14 @@ class User:
         password_valid = True
         if not existing_user:
             valid = False
+            flash("You need to register first!", 'login')
         else:
             password_valid = bcrypt.check_password_hash(existing_user.password, user_input['password'])
             if not password_valid:
                 valid = False
+                flash("The password you entered is incorrect!", 'login')
         if not valid:
-            flash("Your credentials do no match our records.")
+            flash("Your credentials do no match our records.", 'login')
             return False
         return existing_user
 
@@ -96,25 +98,25 @@ class User:
         query = "SELECT * FROM users WHERE email = %(email)s;"
         result = connectToMySQL(db).query_db(query,user)
         if len(result) >= 1:
-            flash("Email already in use. Please Log In.")
+            flash("Email already in use. Please Log In.", 'register')
             is_valid=False
         if not EMAIL_REGEX.match(user['email']):
-            flash("Invalid email address!")
+            flash("Invalid email address!", 'register')
             is_valid = False
         if len(user['first_name']) < 3:
-            flash("First name must be at least 3 characters.")
+            flash("First name must be at least 3 characters.", 'register')
             is_valid = False
         if len(user['last_name']) < 3:
-            flash("Last Name must be at least 3 characters.")
+            flash("Last Name must be at least 3 characters.", 'register')
             is_valid = False
         if len(user['email']) < 5:
-            flash("Email address must be at least 5 characters.")
+            flash("Email address must be at least 5 characters.", 'register')
             is_valid = False
         if len(user['password']) < 8:
-            flash("Password must be at least 8 characters long")
+            flash("Password must be at least 8 characters long", 'register')
             is_valid = False
         if user['password'] != user['confirm_password']:
-            flash("Passwords do not match.")
+            flash("Passwords do not match.", 'register')
             is_valid = False
         return is_valid
 
