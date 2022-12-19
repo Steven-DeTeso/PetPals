@@ -48,7 +48,7 @@ class Status:
     def create_status(cls,stat):
         if not cls.validate_status(stat):
             return False
-        query = "INSERT INTO status (status, datetime, created_at, updated_at) VALUES (%(status)s, %(datetime)s, %(email)s, %(password)s, NOW(), NOW());"
+        query = "INSERT INTO status (id, datetime, status, created_at, updated_at) VALUES (%(id)s, %(datetime)s, %(status)s, %(email)s, NOW(), NOW());"
         new_status_id = connectToMySQL(db).query_db(query, stat)
         new_status = cls.get_by_id(new_status_id)
         return new_status

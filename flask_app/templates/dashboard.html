@@ -36,9 +36,12 @@
     </nav>
     <div>
         <img src="" alt="">
-        <div class="form-group">
-            <textarea type="text" name="status" class="form-control">Say something...</textarea>
-        </div>
+        <form action="/create_new_status" method="post">
+            <div class="form-group">
+                <textarea type="text" name="status" class="form-control" placeholder="Say something..."></textarea>
+                <button type="submit">Post</button>
+            </div>
+        </form>
         <p>OR</p>
         <a href="/">Create an Event</a>
     </div>

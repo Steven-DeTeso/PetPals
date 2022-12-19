@@ -7,12 +7,14 @@ from flask_app.models.Status import Status
 
 ## POST METHODS ##
 
-@app.route('/create_new_status')
+@app.route('/create_new_status', methods=['POST'])
 def create_new_status():
     if 'user_id' not in session:
+        print('user not in session')
         flash("You must be logged in to edit a user's account.")
         return redirect('/')
     valid_status = Status.create_status(request.form)
     if valid_status:
-        return redirect(f'/dashboard')
+        print('valid status')
+        return redirect('/dashboard')
     return redirect('/dashboard')
