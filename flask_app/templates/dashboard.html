@@ -47,7 +47,7 @@
         <img src="" alt="">
         {% for status in statuses %}
         <p>{{status.friend.name}} says...</p><br>
-            {{% if event == friend.event %}}
+            {% if event == friend.event %}
         <p>{{friend.event}}</p>
         {% else %}
         <p>{{friend.status}}</p>
