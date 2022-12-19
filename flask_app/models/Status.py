@@ -38,7 +38,7 @@ class Status:
 
     @classmethod
     def update_status(cls, stat_dict, session_id):
-        if not cls.valid_status_update(stat_dict):
+        if not cls.validate_status(stat_dict):
             return False
         query = "UPDATE status SET status = %(status)s WHERE id = %(id)s;"
         status = connectToMySQL(db).query_db(query, stat_dict)
@@ -49,25 +49,14 @@ class Status:
         if not cls.validate_status(stat):
             return False
         query = "INSERT INTO status (status, datetime, created_at, updated_at) VALUES (%(status)s, %(datetime)s, %(email)s, %(password)s, NOW(), NOW());"
-        new_status_id = connectToMySQL(db).query_db(query, status)
+        new_status_id = connectToMySQL(db).query_db(query, stat)
         new_status = cls.get_by_id(new_status_id)
         return new_status
 
     @staticmethod
-    def validate_user(status):
+    def validate_status(status):
         is_valid = True
-        query = "SELECT * FROM status WHERE id = %(id)s;"
-        result = connectToMySQL(db).query_db(query,status)
         if len(status['status']) < 2:
             flash("Status must be at least 2 characters long")
             is_valid = False
-        return is_valid
-
-    @staticmethod
-    def valid_status_update(status):
-        is_valid = True
-        query = "SELECT * FROM status WHERE id = %(id)s;"
-        result = connectToMySQL(db).query_db(query,status)
-        if len(status['status']) < 2:
-            flash("Status must be at least 2 characters.")
         return is_valid
