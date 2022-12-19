@@ -2,15 +2,15 @@ from flask_app import app
 from flask import Flask, render_template, redirect, request, session, flash
 from flask_app.models.User import User
 from flask_app.models.Event import Event
-from flask_app.models.Friend import Friend
 from flask_app.models.Status import Status
-
+from flask_app.models.Friend import Friend
 
 ### RENDERING METHODS ###
 
 @app.route('/')
 def home():
-    return render_template('Login_Page.HTML')
+    return render_template('Login_Page.html')
+
     
 @app.route('/register')
 def register():
@@ -22,7 +22,7 @@ def r_register_user():
     if not valid_user:
         return redirect('/')
     session['user_id'] = valid_user.id
-    return redirect('/')
+    return redirect('/dashboard')
 
 
 @app.route('/login', methods=['POST'])
@@ -45,7 +45,9 @@ def dashboard():
         return redirect('/')
     user = User.get_by_id(session['user_id'])
     events = Event.get_all_events()
-    return render_template('Dashboard.html', user=user, events=events)
+    status = Status.get_all_statuses()
+    return render_template('dashboard.html', user=user, events=events, status=status)
+
 
 ### POST METHODS ###
 
@@ -60,4 +62,3 @@ def update_user():
     if valid_user:
         return redirect(f"/user/account/")
     return redirect(f"/user/account/")
-
