@@ -21,7 +21,7 @@ def r_register_user():
     if not valid_user:
         return redirect('/')
     session['user_id'] = valid_user.id
-    return redirect('/')
+    return redirect('/dashboard')
 
 
 @app.route('/login', methods=['POST'])
@@ -44,7 +44,8 @@ def dashboard():
         return redirect('/')
     user = User.get_by_id(session['user_id'])
     events = Event.get_all_events()
-    return render_template('dashboard.html', user=user, events=events, time=time)
+    status = Status.get_all_statuses()
+    return render_template('dashboard.html', user=user, events=events, status=status)
 
 ### POST METHODS ###
 

@@ -63,7 +63,7 @@ class User:
         return user
 
     @classmethod
-    def create_user(cls,user):
+    def create_user(cls, user:dict):
         if not cls.validate_user(user):
             return False
         pw_hash = bcrypt.generate_password_hash(user['password'])
