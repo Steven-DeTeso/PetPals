@@ -63,4 +63,20 @@ def leave_event():
     Event.leave_event(request.form)
     return redirect('/event-search')
 
+# When creating the form for the Join or leave routes this is the form i created in my solo for reference:
+
+# <td>
+#     <form action="/join_event" method="post">
+#         <input type="hidden" value="{{session['user_id']}}" name="user_id">
+#         <input type="hidden" value="{{event.id}}" name="event_id">
+#         <input type="submit" value="Join">
+#     </form>
+# </td>
+
+
+# <form action="/leave_event" method="post">
+#     <input type="hidden" value="{{session['user_id']}}" name="user_id">
+#     <input type="hidden" value="{{event.id}}" name="event_id">
+#     <input type="submit" value="Leave">
+# </form>
 
