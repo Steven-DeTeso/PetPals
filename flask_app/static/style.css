@@ -4,3 +4,92 @@
     margin: 0px;
     padding: 0px;
 }
+/* all css */
+*{
+    margin: 0px;    /* setting margin and padding for document/*/
+    padding: 0px;
+}
+
+.outline {     /* setting the outline /*/
+  border: 5px solid red;
+}
+
+h1 {
+  color: white;
+}
+
+body {
+    min-width: 600px;
+}
+.header {
+  background: teal;
+  display:flex;
+  flex-direction:column;
+  padding: 0px 10%;
+}
+.header-top-left{
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+}
+.header-top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.header-bottom {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;   
+}
+
+
+
+.main {
+  padding: 0px 10%;
+}
+.pet {
+  display:flex;
+  background: lightgray;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 25px 25px;
+  padding: 20px;
+  margin: 20px;
+  
+}
+
+.pet-description-container {
+  flex-grow: 1;
+}
+.pet-pic {
+  width: 100px;
+  height: 100px;
+  margin-right: 20px;
+
+}
+
+.pet-button {
+  color: white;   /* pet button colors/*/
+  background: teal;
+  border: 2px bold black;
+  height: 30px;
+  width: 160px;
+  
+}
+.donate-button {    /* donate button colors/*/
+  color:purple;
+  background:white;
+  border: 2px solid purple;
+  border-radius: 25px;
+  padding: 10px;
+
+}
+.friend-button { /* friend button colors/*/
+  color:white;
+  background:purple;
+  border-radius: 25px;
+}
