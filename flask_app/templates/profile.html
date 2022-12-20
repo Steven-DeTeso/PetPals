@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+        <a class="navbar-brand" href="/dashboard">PetPals</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/dashboard">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/">Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/">Friends</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/">Events</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Logout</a>
+            </li>
+            </ul>
+        </div>
+        </div>
+    </nav>
+    <div>
+        <img src="" alt="">
+        <h3>{{user.first_name}}{{user.last_name}}'s Profile</h3>
+        <div class="form-group">
+            <textarea type="text" name="status" class="form-control">Say something...</textarea>
+        </div>
+        <p>OR</p>
+        <a href="/">Create an Event</a>
+    </div>
+    <div>
+        
+    </div>
+    </div>
+</body>
+</html>
