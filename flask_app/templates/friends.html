@@ -19,7 +19,7 @@
                 <a class="nav-link active" aria-current="page" href="/dashboard">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/">Profile</a>
+                <a class="nav-link" href="/profile">Profile</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/">Friends</a>
@@ -32,32 +32,17 @@
             </li>
             </ul>
         </div>
-        </div>
     </nav>
     <div>
         <img src="" alt="">
-        <h3>{{user.first_name}} {{user.last_name}}'s Profile</h3>
-        <div class="form-group">
-            <textarea type="text" name="status" class="form-control">Say something...</textarea>
-        </div>
-        <p>OR</p>
-        <a href="/">Create an Event</a>
+        <h3><u>{{user.first_name}} {{user.last_name}}'s friends</u></h3>
     </div>
     <div>
-        {% for user.status in statuses %}
-        <p> {status.datetime} <br> {user.status}</p>
+        {% for user.friend in friends %}
+        <ul>
+            <li>{{user.friend.first_name}} {{user.friend.last_name}}</li>
+        </ul>
         {% endfor %}
     </div>
-    <div>
-        {% if session['user_id'] == event.user_id %}
-        <h3>{user.first_name}'s Events</h3>
-        {% for user.event in user_events %}
-        <p><strong>{event.name}</strong></p>
-        <p><strong>When: </strong>{event.date}</p>
-        <p><strong>Where: </strong>{event.location}</p>
-        <p><strong>Details: </strong>{event.details}</p>
-        {% endif %}
-        {% endfor %}
-    </div>   
 </body>
 </html>

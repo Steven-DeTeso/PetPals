@@ -19,7 +19,7 @@
                 <a class="nav-link active" aria-current="page" href="/dashboard">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/">Profile</a>
+                <a class="nav-link" href="/profile">Profile</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/">Friends</a>
@@ -32,32 +32,30 @@
             </li>
             </ul>
         </div>
-        </div>
     </nav>
     <div>
-        <img src="" alt="">
-        <h3>{{user.first_name}} {{user.last_name}}'s Profile</h3>
+        <form action="/event/{{event.id}}/update" method="post">
+            <input type="hidden" name="event_id" value="{{event.user_id}}">
+        <h3>{{user.first_name}} {{user.last_name}}, Edit Your Event!</h3>
+        <a href="/delete/{{event.id}}" method="post">delete event</a>
         <div class="form-group">
-            <textarea type="text" name="status" class="form-control">Say something...</textarea>
+            <label for="name">Event Name:</label>
+            <input type="text" name="name" value="{{user.event.name}}" class="form-control">
         </div>
-        <p>OR</p>
-        <a href="/">Create an Event</a>
+        <div class="form-group">
+            <label for="date">Event Date: </label>
+            <input type="date" name="date" value="{{user.event.date}}" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="location">Location: </label>
+            <input type="text" name="location" value="{{user.event.location}}" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="details">Details:</label>
+            <textarea type="text" name="details" class="form-control">{{event.details}}</textarea>
+        </div>
+        </form>
+
     </div>
-    <div>
-        {% for user.status in statuses %}
-        <p> {status.datetime} <br> {user.status}</p>
-        {% endfor %}
-    </div>
-    <div>
-        {% if session['user_id'] == event.user_id %}
-        <h3>{user.first_name}'s Events</h3>
-        {% for user.event in user_events %}
-        <p><strong>{event.name}</strong></p>
-        <p><strong>When: </strong>{event.date}</p>
-        <p><strong>Where: </strong>{event.location}</p>
-        <p><strong>Details: </strong>{event.details}</p>
-        {% endif %}
-        {% endfor %}
-    </div>   
 </body>
 </html>
