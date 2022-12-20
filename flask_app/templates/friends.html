@@ -32,23 +32,17 @@
             </li>
             </ul>
         </div>
-        </div>
     </nav>
     <div>
         <img src="" alt="">
-        <h3>{{user.first_name}} {{user.last_name}}, <a href="">Create An Event</a></h3>
+        <h3><u>{{user.first_name}} {{user.last_name}}'s friends</u></h3>
     </div>
     <div>
-        <h3><u>Events Feed</u></h3>
-        {% for friend.event in events %}
-        <div>
-            <h5>{{friend.first_name}} {{friend.last_name}}'s Event</h5>
-            <p><strong>{friend.event.name}</strong></p>
-            <p><strong>When: </strong>{friend.event.date}</p>
-            <p><strong>Where: </strong>{friend.event.location}</p>
-            <p><strong>Details: </strong>{friend.event.details}</p>
+        {% for user.friend in friends %}
+        <ul>
+            <li>{{user.friend.first_name}} {{user.friend.last_name}}</li>
+        </ul>
         {% endfor %}
-        </div>
     </div>
 </body>
 </html>

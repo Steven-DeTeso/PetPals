@@ -32,23 +32,30 @@
             </li>
             </ul>
         </div>
-        </div>
     </nav>
     <div>
-        <img src="" alt="">
-        <h3>{{user.first_name}} {{user.last_name}}, <a href="">Create An Event</a></h3>
-    </div>
-    <div>
-        <h3><u>Events Feed</u></h3>
-        {% for friend.event in events %}
-        <div>
-            <h5>{{friend.first_name}} {{friend.last_name}}'s Event</h5>
-            <p><strong>{friend.event.name}</strong></p>
-            <p><strong>When: </strong>{friend.event.date}</p>
-            <p><strong>Where: </strong>{friend.event.location}</p>
-            <p><strong>Details: </strong>{friend.event.details}</p>
-        {% endfor %}
+        <form action="/event/{{event.id}}/update" method="post">
+            <input type="hidden" name="event_id" value="{{event.user_id}}">
+        <h3>{{user.first_name}} {{user.last_name}}, Edit Your Event!</h3>
+        <a href="/delete/{{event.id}}" method="post">delete event</a>
+        <div class="form-group">
+            <label for="name">Event Name:</label>
+            <input type="text" name="name" value="{{user.event.name}}" class="form-control">
         </div>
+        <div class="form-group">
+            <label for="date">Event Date: </label>
+            <input type="date" name="date" value="{{user.event.date}}" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="location">Location: </label>
+            <input type="text" name="location" value="{{user.event.location}}" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="details">Details:</label>
+            <textarea type="text" name="details" class="form-control">{{event.details}}</textarea>
+        </div>
+        </form>
+
     </div>
 </body>
 </html>
