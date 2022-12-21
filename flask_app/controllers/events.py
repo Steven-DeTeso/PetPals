@@ -11,9 +11,11 @@ from flask_app.models.Status import Status
 def newevent():
     if 'user_id' not in session:
         flash("You must be logged in to edit a user's account.")
+        print('test')
         return redirect('/')
     user = User.get_by_id(session['user_id'])
-    return render_template('CreateEvent.HTML', user=user)
+    print('test2')
+    return render_template('create_event.html', user=user)
 
 @app.route('/eventinfo/<int:event_id>')
 def eventinfo(event_id):
@@ -31,7 +33,7 @@ def eventlist():
         return redirect('/')
     user = User.get_by_id(session['user_id'])
     events = Event.get_all_events()
-    return render_template('eventlist.HTML', user=user, events=events)
+    return render_template('events.html', user=user, events=events)
 
 
 
