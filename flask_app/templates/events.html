@@ -22,10 +22,10 @@
                 <a class="nav-link" href="/profile">Profile</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/">Friends</a>
+                <a class="nav-link" href="/friends">Friends</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/">Events</a>
+                <a class="nav-link" href="/event-list">Events</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/logout">Logout</a>
@@ -36,11 +36,11 @@
     </nav>
     <div>
         <img src="" alt="">
-        <h3>{{user.first_name}} {{user.last_name}}, <a href="">Create An Event</a></h3>
+        <h3>{{user.first_name}} {{user.last_name}}, <a href="/new-event">Create An Event</a></h3>
     </div>
     <div>
         <h3><u>Events Feed</u></h3>
-        {% for friend.event in events %}
+        {% for event in events %}
         <div>
             <h5>{{friend.first_name}} {{friend.last_name}}'s Event</h5>
             <p><strong>{friend.event.name}</strong></p>

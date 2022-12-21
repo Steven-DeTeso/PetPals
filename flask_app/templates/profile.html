@@ -19,13 +19,13 @@
                 <a class="nav-link active" aria-current="page" href="/dashboard">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/">Profile</a>
+                <a class="nav-link" href="/profile">Profile</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/">Friends</a>
+                <a class="nav-link" href="/friends">Friends</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/">Events</a>
+                <a class="nav-link" href="/event-list">Events</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/logout">Logout</a>
@@ -44,19 +44,19 @@
         <a href="/">Create an Event</a>
     </div>
     <div>
-        {% for user.status in statuses %}
+        {% for status in statuses %}
         <p> {status.datetime} <br> {user.status}</p>
         {% endfor %}
     </div>
     <div>
-        {% if session['user_id'] == event.user_id %}
+        {% if session['user_id'] == events.user_id %}
         <h3>{user.first_name}'s Events</h3>
-        {% for user.event in user_events %}
+        {% endif %}
+        {% for event in user_events %}
         <p><strong>{event.name}</strong></p>
         <p><strong>When: </strong>{event.date}</p>
         <p><strong>Where: </strong>{event.location}</p>
         <p><strong>Details: </strong>{event.details}</p>
-        {% endif %}
         {% endfor %}
     </div>   
 </body>

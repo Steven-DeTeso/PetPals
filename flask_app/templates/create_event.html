@@ -22,7 +22,7 @@
                 <a class="nav-link" href="/profile">Profile</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/">Friends</a>
+                <a class="nav-link" href="/friends">Friends</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/event-list">Events</a>
@@ -35,7 +35,7 @@
     </nav>
     <div>
         <h3>{{user.first_name}} {{user.last_name}}, Create Your Event!</h3>
-        <form>
+        <form action="/event" method="POST">
             <div class="form-group">
                 <label for="name">Event Name:</label>
                 <input type="text" name="name" class="form-control">
@@ -49,9 +49,14 @@
                 <input type="text" name="location" class="form-control">
             </div>
             <div class="form-group">
+                <label for="time">Time: </label>
+                <input type="time" name="time" class="form-control">
+            </div>
+            <div class="form-group">
                 <label for="details">Details:</label>
                 <textarea type="text" name="details" class="form-control"></textarea>
             </div>
+            <button type="submit">Submit</button>
         </form>
     </div>
 </body>

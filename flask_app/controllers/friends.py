@@ -13,7 +13,8 @@ def view_friends():
         flash("You must be logged in to edit a user's account.")
         return redirect('/')
     friends = Friend.get_all_freinds()
-    return render_template('Friends.html', friends=friends)
+    user = User.get_by_id(session['user_id'])
+    return render_template('friends.html', friends=friends, user=user)
 
 ### POST METHODS ###
 

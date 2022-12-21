@@ -54,7 +54,8 @@ def render_profile():
         flash("You must be logged in to edit a user's account.")
         return redirect('/')
     user = User.get_by_id(session['user_id'])
-    return render_template('profile.html', user=user)
+    events = Event.get_all_events()
+    return render_template('profile.html', user=user, events=events)
 
 
 ### POST METHODS ###
