@@ -5,6 +5,10 @@
   padding: 0px;
 }
 
+.bg-color{
+  background-color:lightgoldenrodyellow;
+}
+
 nav{
   background-color: #e3f2fd;
 }
@@ -106,3 +110,13 @@ nav{
   margin: 10px;
   padding: 10px;
 }
+
+.createEvent{
+  margin: auto;
+  width: 600px;
+  border: 2px solid black;
+  margin-top: 20px;
+  padding: 20px;
+  background-color: rgb(227 242 253);
+}
+

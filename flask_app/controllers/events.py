@@ -57,9 +57,9 @@ def f_create_a_event():
         flash("You must be logged in to edit a user's account.")
         return redirect('/')
     valid_event = Event.create_valid_event(request.form)
-    if valid_event:
-        return redirect('/confirm_event')
-    return redirect('/dashboard')
+    if not valid_event:
+        return redirect('/new-event')
+    return redirect('/confirm_event') 
     
 @app.route('/join_event', methods=['POST'])
 def join_event():

@@ -54,8 +54,8 @@
         <img src="/avatar_img.jpeg" alt="">
     </div>
     {% for status in statuses %}
+    <p class="ms-3"><u>{{user.first_name}} {{user.last_name}}</u> says...</p>
     <div class="statusDashUpdates">
-        <p><u>{{user.first_name}} {{user.last_name}}</u> says...</p>
         <p>{{status.status}}</p>
         <p>{{user.updated_at}}</p><br>
     </div>
