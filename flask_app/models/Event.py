@@ -137,12 +137,12 @@ class Event:
     def is_valid(event_dict):
         valid = True
         if len(event_dict["name"]) < 2:
-            flash("Name has to be at least 2 characters long.")
+            flash("Name has to be at least 2 characters long.", 'event')
             valid = False
         if len(event_dict["location"]) < 8:
-            flash("Location has to be at least 8 characters long.")
+            flash("Location has to be at least 8 characters long.", 'event')
             valid = False
         if len(event_dict["details"]) < 10:
-            flash("Details have to be at least 10 characters long.")
+            flash("Details have to be at least 10 characters long.", 'event')
             valid = False
         return valid

@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Create an Event</title>
     <script src="/flask_app/static/popups.JS"></script>
 </head>
-<body>
+<body class="container bg-color">
     <nav class="navbar navbar-expand-xl navbar-expand-xl">
         <div class="container-fluid">
             <img class="pawprint" src="static/pngwing.com.png">
@@ -36,8 +38,18 @@
         </div>
         </div>
     </nav>
-    <div>
-        <h3>{{user.first_name}} {{user.last_name}}, Create Your Event!</h3>
+    <div class="createEvent">
+        {% with messages = get_flashed_messages(category_filter=['event']) %}
+            {% if messages %}
+                <div class="alert alert-danger" role="alert">
+                        <strong>INVALID</strong>
+                        {% for message in messages %}
+                        <p>{{message}}</p>
+                        {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        <h3 class="my-3"><u>{{user.first_name}} {{user.last_name}}, Create Your Event!</u></h3>
         <form action="/event" method="POST">
             <div class="form-group">
                 <label for="name">Event Name:</label>
@@ -60,7 +72,7 @@
                 <textarea type="text" name="details" class="form-control"></textarea>
             </div>
             <input type="hidden" name="user_id" value="{{user.id}}">
-            <button type="submit">Submit</button>
+            <button type="submit" class="btn btn-success mt-2">Post Event!</button>
         </form>
     </div>
 </body>

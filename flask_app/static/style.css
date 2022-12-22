@@ -5,6 +5,10 @@
   padding: 0px;
 }
 
+.bg-color{
+  background-color:lightgoldenrodyellow;
+}
+
 nav{
   background-color: #e3f2fd;
 }
@@ -27,6 +31,10 @@ nav{
 .logo{
   font-family: Pacifico;
   font-size: 40px;
+}
+
+#stockAvatar{
+  width: 50px;
 }
 
 .indiefont{
@@ -84,3 +92,35 @@ nav{
 #navbarNav{
   font-size: 30px;
 }
+
+#btnDash, #createDash, #orDash{
+  margin: auto;
+}
+
+#statusDash{
+  width: 300px;
+  height: 100px;
+}
+
+#statusBar {
+  border-bottom: 2px solid black;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+}
+
+.statusDashUpdates{
+  border: 2px solid black;
+  width: 600px;
+  margin: 10px;
+  padding: 10px;
+}
+
+.createEvent{
+  margin: auto;
+  width: 600px;
+  border: 2px solid black;
+  margin-top: 20px;
+  padding: 20px;
+  background-color: rgb(227 242 253);
+}
+
