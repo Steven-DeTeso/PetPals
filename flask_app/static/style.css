@@ -5,24 +5,82 @@
   padding: 0px;
 }
 
-h1 {
-  color: white;
-  font-size:x-large;
+nav{
+  background-color: #e3f2fd;
 }
 
-h2 {
-  color:white;
-  flex-direction: column;
+.pawprint{
+  height: 50px;
+  margin: 10px;
 }
 
-p {
-  color:white;
+@font-face {
+  font-family: Pacifico;
+  src: url(../static/Pacifico-Regular.ttf);
 }
 
-.form-group {
-  margin: auto;
+@font-face {
+  font-family: IndieFlower;
+  src: url(../static/IndieFlower-Regular.ttf);
 }
 
-.p2  {
-  color:white;
+.logo{
+  font-family: Pacifico;
+  font-size: 40px;
+}
+
+.indiefont{
+  font-family: IndieFlower;
+}
+
+.tagline{
+  font-size: 50px;
+}
+
+.tag2 {
+  padding-top: 115px;
+  font-size: 30px;
+}
+
+.flex-container{
+  display: flex;
+  margin: 20px;
+}
+
+.flex-child{
+  flex: 1;
+}
+
+.login-right{
+  border: 2px solid black;
+  border-radius: 5%;
+  padding: 30px;
+  background-color: rgb(227 242 253);
+}
+
+#firstName{
+  margin-right: 15px;
+}
+
+#lastName{
+  margin-left: 15px;
+}
+
+#signUpLogin{
+  text-align: center;
+  margin-bottom: 20px;
+  font-family: IndieFlower;
+  font-size: xxx-large;
+}
+
+#btnLoginReg{
+  margin-left: -10px;
+}
+
+#infoLoginReg{
+  text-align: center;
+}
+
+#navbarNav{
+  font-size: 30px;
 }
