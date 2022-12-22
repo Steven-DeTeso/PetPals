@@ -24,6 +24,8 @@ class Event:
         self.updated_at = data['updated_at']
         self.user = None
 
+    # query below works in mysql workbench, but a lot of fields are not populated.
+    # also can remove fields email and password because that info is not needed. 
     @classmethod
     def get_all_events(cls):
         query = """SELECT events.id as event_id, 
