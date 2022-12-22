@@ -48,6 +48,15 @@
             <p><strong>Time: </strong>{{event.time}}</p>
             <p><strong>Where: </strong>{{event.location}}</p>
             <p><strong>Details: </strong>{{event.details}}</p>
+            <p>
+                {% if session['user_id'] != event.user_id %}
+                <form action="/join_event" method="post">
+                    <input type="hidden" value="{{session['user_id']}}" name="user_id">
+                    <input type="hidden" value="{{event.id}}" name="event_id">
+                    <input type="submit" value="Join">
+                </form>
+                {%endif%}
+            </p>
             {% endfor %}
         </div>
     </div>

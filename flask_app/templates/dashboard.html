@@ -64,8 +64,15 @@
             <p><strong>When: </strong>{{event.date}}</p>
             <p><strong>Where: </strong>{{event.location}}</p>
             <p><strong>Details: </strong>{{event.details}}</p>
+            <p>
+                <form action="/leave_event" method="post">
+                    <input type="hidden" value="{{session['user_id']}}" name="user_id">
+                    <input type="hidden" value="{{event.id}}" name="event_id">
+                    <input type="submit" value="Leave">
+                </form>
+            </p>
             {% endif %}
         {% endfor %}
-    </div>  
+    </div>
 </body>
 </html>
