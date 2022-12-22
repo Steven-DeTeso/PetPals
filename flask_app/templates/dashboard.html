@@ -37,30 +37,31 @@
         </div>
         </div>
     </nav>
-    <div>
+    <div class="flex-container" id="statusBar">
         <img src="" alt="">
         <form action="/create_new_status" method="post">
-            <div class="form-group">
-                <textarea type="text" name="status" class="form-control" placeholder="Say something..."></textarea>
-                <!-- do we need datetime recorded in db 'statuses' table, it has created/updated_at already? -->
+            <div class="form-group d-flex">
+                <textarea type="text" name="status" class="form-control" placeholder="Say something..." id="statusDash"></textarea>
                 <input type="hidden" name="user_id" value="{{user.id}}">
-                <button type="submit">Post</button>
+                <button type="submit" class="btn btn-success mx-2" id="btnDash">Post</button>
             </div>
         </form>
-        <p>OR</p>
-        <a href="/new-event">Create an Event</a>
+        <p class="orDash my-auto ms-3">OR</p>
+        <a href="/new-event" class="createDash my-auto ms-3">Create an Event</a>
     </div>
     <div>
-        <h3>Statuses and Events Feed</h3>
+        <h3 class="ms-3"><u>Statuses and Events Feed</u></h3>
         <img src="/avatar_img.jpeg" alt="">
-        {% for status in statuses %}
-        <p>{{status.status}}</p>
-        <p>{{user.first_name}} {{user.last_name}} says...</p>
-        <p>{{user.updated_at}}</p><br>
-        {% endfor %}
     </div>
+    {% for status in statuses %}
+    <div class="statusDashUpdates">
+        <p><u>{{user.first_name}} {{user.last_name}}</u> says...</p>
+        <p>{{status.status}}</p>
+        <p>{{user.updated_at}}</p><br>
+    </div>
+        {% endfor %}
     <div>
-        <h3>{{user.first_name}}'s Events</h3>
+        <h3><u>{{user.first_name}}'s Upcoming Events</u></h3>
         {% for event in events %}
             {% if session['user_id'] == event.user_id %}
             <p><strong>{{event.name}}</strong></p>

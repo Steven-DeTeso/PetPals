@@ -84,3 +84,25 @@ nav{
 #navbarNav{
   font-size: 30px;
 }
+
+#btnDash, #createDash, #orDash{
+  margin: auto;
+}
+
+#statusDash{
+  width: 300px;
+  height: 100px;
+}
+
+#statusBar {
+  border-bottom: 2px solid black;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+}
+
+.statusDashUpdates{
+  border: 2px solid black;
+  width: 600px;
+  margin: 10px;
+  padding: 10px;
+}
