@@ -98,7 +98,7 @@ class User:
         if len(result) >= 1:
             flash("Email already in use. Please Log In.", 'register')
             is_valid=False
-        if not EMAIL_REGEX.match(user['email']):
+        if not EMAIL_REGEX.match(user.get('email')):
             flash("Invalid email address!", 'register')
             is_valid = False
         if len(user['first_name']) < 3:
@@ -111,7 +111,7 @@ class User:
             flash("Email address must be at least 5 characters.", 'register')
             is_valid = False
         if len(user['password']) < 8:
-            flash("Password must be at least 8 characters long", 'register')
+            flash("Password must be at least 9 characters long", 'register')
             is_valid = False
         if user['password'] != user['confirm_password']:
             flash("Passwords do not match.", 'register')
