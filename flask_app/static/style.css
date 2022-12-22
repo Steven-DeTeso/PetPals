@@ -26,6 +26,7 @@ nav{
 
 .logo{
   font-family: Pacifico;
+  font-size: 40px;
 }
 
 .indiefont{
@@ -78,4 +79,8 @@ nav{
 
 #infoLoginReg{
   text-align: center;
+}
+
+#navbarNav{
+  font-size: 30px;
 }
