@@ -41,7 +41,6 @@
             <div class="form-group">
                 <textarea type="text" name="status" class="form-control" placeholder="Say something..."></textarea>
                 <!-- do we need datetime recorded in db 'statuses' table, it has created/updated_at already? -->
-                <input type="hidden" name="datetime">
                 <input type="hidden" name="user_id" value="{{user.id}}">
                 <button type="submit">Post</button>
             </div>
@@ -51,19 +50,19 @@
     </div>
     <div>
         {% for status in statuses %}
-        <p> {status.datetime} <br> {user.status}</p>
+        <p> {{status.status}} <br> {{status.updated_at}} </p>
         {% endfor %}
     </div>
     <div>
+        <h3>{{user.first_name}}'s Events</h3>
         {% if session['user_id'] == events.user_id %}
-        <h3>{user.first_name}'s Events</h3>
+            {% for event in events %}
+            <p><strong>{{event.name}}</strong></p>
+            <p><strong>When: </strong>{{event.date}}</p>
+            <p><strong>Where: </strong>{{event.location}}</p>
+            <p><strong>Details: </strong>{{event.details}}</p>
+            {% endfor %}
         {% endif %}
-        {% for event in user_events %}
-        <p><strong>{event.name}</strong></p>
-        <p><strong>When: </strong>{event.date}</p>
-        <p><strong>Where: </strong>{event.location}</p>
-        <p><strong>Details: </strong>{event.details}</p>
-        {% endfor %}
     </div>   
 </body>
 </html>

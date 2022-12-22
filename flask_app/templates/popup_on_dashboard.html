@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>
+<body onload="{{ 'openPopUpOnLoad()' }}">
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container-fluid">
         <a class="navbar-brand" href="/dashboard">PetPals</a>
@@ -56,5 +56,6 @@
         <p>{{user.updated_at}}</p><br>
         {% endfor %}
     </div>
+    <script src="{{ url_for('static', filename='flask_app/static/popups.js') }}"></script>
 </body>
 </html>
