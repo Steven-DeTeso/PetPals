@@ -8,89 +8,88 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title>Register & Login</title>
 </head>
-<body>
-    <body style="background-color:red;">
-<div>
-    <h1 class="hi">Pet Pals</h1>
-</div>
-<div>
-    <h2 class="h2">The most wholesome social media platform to exist</h2> 
-    <p class="p">PetPals is a social media platform for our pets to make friends! Find events and furry pals near you today!</p>   
-</div>
-    <div>
-        <form action="register_user" method="post">
-            <h2 class="text-danger">Sign Up</h2>
-            {% with messages = get_flashed_messages(category_filter=['register']) %}
-                {% if messages %}
-                <div class="alert alert-danger" role="alert">
-                    <strong>INVALID</strong>
-                    {% for message in messages %}
-                    <p>{{message}}</p>
-                    {% endfor %}
-                </div>
-                {% endif %}
-            {% endwith %}
-            <div class="form-group">
-                <label for="first_name">First Name: </label>
-                <input type="text" placeholder="Enter First Name" name="First Name" id="First Name" required>
-             <!--    <input type="text" name="first_name" class=""> -->
-            </div>
-            <div class="form-group">
-                <label for="last_name">Last Name: </label>
-                <input type="text" placeholder="Enter Last Name" name="Last Name" id="Last Name" required>
-                 <!-- <input type="text" name="last_name" class=""> -->
-            </div>
-            <div class="form-group">
-                <label for="email">Email: </label>
-                <input type="text" placeholder="Email Address" email="Email" id="Email" required>
-                <!--  <input type="text" name="email" class=""> -->
-            </div>
-            <div class="form-group">
-                <label for="password">Password: </label>
-                <input type="text" placeholder="Password" password="Password" id="Password" required>
-                <!-- <input type="password" name="password" class=""> -->  
-            </div>
-            <div class="form-group">
-                <label for="confirm_password">Confirm Password: </label>
-                <input type="text" placeholder="confirm password" confirm password="confirm password" id="confirm_password" required>
-                 <!-- <input type="password" name="confirm_password" class=""> --> 
-            </div>
-            <div>
-                <p class="p2">Use at least seven letters, one number, and one special character</p>
-            </div>
-            <div>
-                <br>
-                <input type="submit" value="Register">
-            </div>
-        </form>
-        <form action="/login" method="post" class="">
-            <h2 class="">Login</h2>
-            {% with messages = get_flashed_messages(category_filter=['login']) %}
-                {% if messages %}
-                <div class="alert alert-danger" role="alert">
-                    <strong>INVALID</strong>
+<body class="container">
+    <nav class="navbar navbar-expand-xl navbar-light">
+        <img class="pawprint" src="static/pngwing.com.png" alt="">
+        <h1 class="logo">PetPals</h1>
+    </nav>
+    <div class="flex-container">
+        <div class="flex-child">
+            <h2 class="indiefont tagline">The most wholesome social media on the web!</h2> 
+            <p class="login-left indiefont tag2">PetPals is a social media platform for our pets to make friends! Find events and furry pals near you today!</p>   
+        </div>
+        <div class="flex-child">
+            <form action="register_user" method="post">
+                <h2>Sign Up</h2>
+                {% with messages = get_flashed_messages(category_filter=['register']) %}
+                    {% if messages %}
+                    <div class="alert alert-danger" role="alert">
+                        <strong>INVALID</strong>
                         {% for message in messages %}
                         <p>{{message}}</p>
                         {% endfor %}
+                    </div>
+                    {% endif %}
+                {% endwith %}
+                <div class="form-group">
+                    <label for="first_name">First Name: </label>
+                    <input type="text" placeholder="Enter First Name" name="First Name" id="First Name" required>
+                <!--    <input type="text" name="first_name" class=""> -->
                 </div>
-                {% endif %}
-            {% endwith %}
-            <div class="form-group">
-                <label for="email">Email: </label>
-                <input type="text" name="email" class=""> 
-            </div>
-            <div class="form-group">
-                <label for="password">Password: </label>
-                <input type="password" name="password" class="">
-            </div>
-            <div>
-                <br>
-                <input type="submit" value="Login" class="">
-            </div>
-            
-        </form>
+                <div class="form-group">
+                    <label for="last_name">Last Name: </label>
+                    <input type="text" placeholder="Enter Last Name" name="Last Name" id="Last Name" required>
+                    <!-- <input type="text" name="last_name" class=""> -->
+                </div>
+                <div class="form-group">
+                    <label for="email">Email: </label>
+                    <input type="text" placeholder="Email Address" email="Email" id="Email" required>
+                    <!--  <input type="text" name="email" class=""> -->
+                </div>
+                <div class="form-group">
+                    <label for="password">Password: </label>
+                    <input type="text" placeholder="Password" password="Password" id="Password" required>
+                    <!-- <input type="password" name="password" class=""> -->  
+                </div>
+                <div class="form-group">
+                    <label for="confirm_password">Confirm Password: </label>
+                    <input type="text" placeholder="confirm password" confirm password="confirm password" id="confirm_password" required>
+                    <!-- <input type="password" name="confirm_password" class=""> --> 
+                </div>
+                <div>
+                    <p class="p2">Use at least seven letters, one number, and one special character</p>
+                </div>
+                <div>
+                    <br>
+                    <input type="submit" value="Register">
+                </div>
+            </form>
+            <form action="/login" method="post" class="">
+                <h2 class="">Login</h2>
+                {% with messages = get_flashed_messages(category_filter=['login']) %}
+                    {% if messages %}
+                    <div class="alert alert-danger" role="alert">
+                        <strong>INVALID</strong>
+                            {% for message in messages %}
+                            <p>{{message}}</p>
+                            {% endfor %}
+                    </div>
+                    {% endif %}
+                {% endwith %}
+                <div class="form-group">
+                    <label for="email">Email: </label>
+                    <input type="text" name="email" class=""> 
+                </div>
+                <div class="form-group">
+                    <label for="password">Password: </label>
+                    <input type="password" name="password" class="">
+                </div>
+                <div>
+                    <br>
+                    <input type="submit" value="Login" class="">
+                </div>
+            </form>
+        </div>
     </div>
-</body>
-</html>
 </body>
 </html>
