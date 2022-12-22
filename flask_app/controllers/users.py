@@ -45,8 +45,8 @@ def dashboard():
         return redirect('/')
     user = User.get_by_id(session['user_id'])
     events = Event.get_all_events()
-    status = Status.get_all_statuses()
-    return render_template('dashboard.html', user=user, events=events, status=status)
+    statuses = Status.get_all_statuses()
+    return render_template('dashboard.html', user=user, events=events, statuses=statuses)
 
 @app.route('/profile')
 def render_profile():
