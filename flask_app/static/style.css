@@ -1,139 +1,28 @@
 /* all css */
-/* *{
-    margin: 0px;    /* setting margin and padding for document/*/
-    /* padding: 0px;
-} */
 
-/* 
-ul {
-  color: black;
+* {
+  margin: 0px;
+  padding: 0px;
 }
 
-nav {
-    min-width: 600px;
-}
-.li {
-/* setting the outline /*/
-/* border: 5px solid red;
-}
-.nav-item {
-  background: red;
-  display:flex;
-  flex-direction:column;
-  padding: 0px 10%;
-} */
-
-/* .nav-link {
-  background: red;
-  display:flex;
-  flex-direction:column;
-  padding: 0px 10%;
-} */
-/* 
-.header {
-  background: red;
-  display:flex;
-  flex-direction:column;
-  padding: 0px 10%;
-}
-.header-top-left{
-  display:flex;
-  flex-direction:row;
-  align-items:center;
-}
-.header-top {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-.header-bottom {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-end;   
-} */
-
-
-/* 
-.main {
-  padding: 0px 10%;
-}
-.pet {
-  display:flex;
-  background: black;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  border-radius: 25px 25px;
-  padding: 20px;
-  margin: 20px;
-  
-}
-
-.pet-description-container {
-  flex-grow: 1;
-}
-.pet-pic {
-  width: 100px;
-  height: 100px;
-  margin-right: 20px;
-
-}
-/* 
-.pet-button {
-  color: black;   /* pet button colors/*/
-  /* background: red;
-  border: 2px bold black;
-  height: 30px;
-  width: 160px;
-  
-} */
-/* .donate-button {    
-  color:black;
-  background:red;
-  border: 2px solid purple;
-  border-radius: 25px;
-  padding: 10px;
-
-} */
-/* .friend-request { 
-  color:black;
-  background:red;
-  border-radius: 25px;
-}   */
 h1 {
   color: white;
   font-size:x-large;
-
-  
 }
+
 h2 {
   color:white;
   flex-direction: column;
 }
+
 p {
   color:white;
- 
 }
+
 .form-group {
-margin: auto;
+  margin: auto;
 }
+
 .p2  {
   color:white;
-}
-.container-fluid {
-
-}
-.navbar-brand {
-
-}
-.nav-item {
-  
-}
-.nav-link {
-  
-}
-.nav-link :active {
-
 }
