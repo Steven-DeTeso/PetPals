@@ -39,6 +39,9 @@
         <form action="/create_new_status" method="post">
             <div class="form-group">
                 <textarea type="text" name="status" class="form-control" placeholder="Say something..."></textarea>
+                <!-- do we need datetime recorded in db 'statuses' table, it has created/updated_at already? -->
+                <input type="hidden" name="datetime">
+                <input type="hidden" name="user_id" value="{{user.id}}">
                 <button type="submit">Post</button>
             </div>
         </form>
@@ -49,12 +52,13 @@
         <h3>Statuses and Events Feed</h3>
         <img src="" alt="">
         {% for status in statuses %}
+        <p>{{status.details}}</p>
         <p>{{status.friend.name}} says...</p><br>
             {% if event == friend.event %}
         <p>{{friend.event}}</p>
         {% else %}
         <p>{{friend.status}}</p>
-        {% endif %}
+            {% endif %}
         {% endfor %}
     </div>
 </body>

@@ -46,7 +46,7 @@ def f_create_a_event():
         return redirect('/')
     valid_event = Event.create_valid_event(request.form)
     if valid_event:
-        return redirect(f'/dashboard')
+        return redirect('/dashboard')
     return redirect('/new-tournament')
     
 @app.route('/join_event', methods=['POST'])

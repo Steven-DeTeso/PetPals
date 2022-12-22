@@ -44,11 +44,12 @@ class Status:
         status = connectToMySQL(db).query_db(query, stat_dict)
         return status
 
+    # datetime column in statuses table will only take datatime data so swapping %(datetime)s to NOW() to test. Possible to remove column field.
     @classmethod
     def create_status(cls,stat):
         if not cls.validate_status(stat):
             return False
-        query = "INSERT INTO status (id, datetime, status, created_at, updated_at) VALUES (%(id)s, %(datetime)s, %(status)s, %(email)s, NOW(), NOW());"
+        query = "INSERT INTO statuses (datetime, status, created_at, updated_at, user_id) VALUES (NOW(), %(status)s, NOW(), NOW(), %(user_id)s);"
         new_status_id = connectToMySQL(db).query_db(query, stat)
         new_status = cls.get_by_id(new_status_id)
         return new_status

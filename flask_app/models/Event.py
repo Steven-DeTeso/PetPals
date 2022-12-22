@@ -24,6 +24,8 @@ class Event:
         self.updated_at = data['updated_at']
         self.user = None
 
+    # query below works in mysql workbench, but a lot of fields are not populated.
+    # also can remove fields email and password because that info is not needed. 
     @classmethod
     def get_all_events(cls):
         query = """SELECT events.id as event_id, 
@@ -53,21 +55,27 @@ class Event:
         print([obj.user_id for obj in event_objects])
         return event_objects
 
+    # This method works! It successfully adds a new event to the database. 
     @classmethod
     def create_valid_event(cls, event_dict):
         if not cls.is_valid(event_dict):
             return False
-        query = "INSERT INTO events (name, date, time, location, details, created_at, updated_at) VALUES (%(name)s, %(game)s, %(date)s, %(time)s, %(location)s, %(details)s, NOW(), NOW());"
+        query = "INSERT INTO events (name, date, time, location, details, created_at, updated_at) VALUES (%(name)s, %(date)s, %(time)s, %(location)s, %(details)s, NOW(), NOW());"
         event_id = connectToMySQL(db).query_db(query, event_dict)
         print(event_id)
         event = cls.get_by_id(event_id)
         return event
 
+    # This method has some issues that need to be addressed. 
     @classmethod
     def get_by_id(cls, event_id):
         print(f"get event by id {event_id}")
         data = {"id": event_id}
-        query = """SELECT events.id as event_id, events.created_at, events.updated_at, name, date, time, location, users.id as user_id, num_applied, num_of_users, details, first_name, last_name, email, password, users.created_at as uc, users.updated_at as uu FROM events LEFT JOIN users_events ON events.id = users_events.event_id LEFT JOIN users ON users.id = users_events.user_id WHERE events.id = %(id)s;"""
+        # Error with query statement below, Selecting from events table but have 'num_applied' as an unknown column name. 
+        query = """SELECT events.id as event_id, events.created_at, events.updated_at, name, date, time, location, users.id as user_id, num_applied, num_of_users, details, first_name, last_name, email, password, users.created_at as uc, users.updated_at as uu 
+        FROM events 
+        LEFT JOIN users_events ON events.id = users_events.event_id 
+        LEFT JOIN users ON users.id = users_events.user_id WHERE events.id = %(id)s;"""
         result = connectToMySQL(db).query_db(query,data)
         result = result[0]
         event = cls(result)
