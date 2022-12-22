@@ -72,7 +72,7 @@ class Event:
         print(f"get event by id {event_id}")
         data = {"id": event_id}
         # Error with query statement below, Selecting from events table but have 'num_applied' as an unknown column name. 
-        query = """SELECT events.id as event_id, events.created_at, events.updated_at, name, date, time, location, users.id as user_id, num_applied, num_of_users, details, first_name, last_name, email, password, users.created_at as uc, users.updated_at as uu 
+        query = """SELECT events.id as event_id, events.created_at, events.updated_at, name, date, time, location, users.id as user_id, details, first_name, last_name, email, password, users.created_at as uc, users.updated_at as uu 
         FROM events 
         LEFT JOIN users_events ON events.id = users_events.event_id 
         LEFT JOIN users ON users.id = users_events.user_id WHERE events.id = %(id)s;"""
