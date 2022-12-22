@@ -1,28 +1,37 @@
 /* all css */
-
-* {
-    margin: 0px;
-    padding: 0px;
-}
-/* all css */
-*{
+/* *{
     margin: 0px;    /* setting margin and padding for document/*/
-    padding: 0px;
+    /* padding: 0px;
+} */
+
+/* 
+ul {
+  color: black;
 }
 
-.outline {     /* setting the outline /*/
-  border: 5px solid red;
-}
-
-h1 {
-  color: white;
-}
-
-body {
+nav {
     min-width: 600px;
 }
+.li {
+/* setting the outline /*/
+/* border: 5px solid red;
+}
+.nav-item {
+  background: red;
+  display:flex;
+  flex-direction:column;
+  padding: 0px 10%;
+} */
+
+/* .nav-link {
+  background: red;
+  display:flex;
+  flex-direction:column;
+  padding: 0px 10%;
+} */
+/* 
 .header {
-  background: teal;
+  background: red;
   display:flex;
   flex-direction:column;
   padding: 0px 10%;
@@ -43,16 +52,16 @@ body {
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-end;   
-}
+} */
 
 
-
+/* 
 .main {
   padding: 0px 10%;
 }
 .pet {
   display:flex;
-  background: lightgray;
+  background: black;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -71,25 +80,60 @@ body {
   margin-right: 20px;
 
 }
-
+/* 
 .pet-button {
-  color: white;   /* pet button colors/*/
-  background: teal;
+  color: black;   /* pet button colors/*/
+  /* background: red;
   border: 2px bold black;
   height: 30px;
   width: 160px;
   
-}
-.donate-button {    /* donate button colors/*/
-  color:purple;
-  background:white;
+} */
+/* .donate-button {    
+  color:black;
+  background:red;
   border: 2px solid purple;
   border-radius: 25px;
   padding: 10px;
 
-}
-.friend-button { /* friend button colors/*/
-  color:white;
-  background:purple;
+} */
+/* .friend-request { 
+  color:black;
+  background:red;
   border-radius: 25px;
+}   */
+h1 {
+  color: white;
+  font-size:x-large;
+
+  
+}
+h2 {
+  color:white;
+  flex-direction: column;
+}
+p {
+  color:white;
+ 
+}
+.form-group {
+margin: auto;
+}
+.p2  {
+  color:white;
+}
+.container-fluid {
+
+}
+.navbar-brand {
+
+}
+.nav-item {
+  
+}
+.nav-link {
+  
+}
+.nav-link :active {
+
 }
