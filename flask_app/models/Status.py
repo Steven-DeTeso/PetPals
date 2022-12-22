@@ -11,7 +11,6 @@ db = "PetsOnly"
 class Status:
     def __init__(self, data:dict):
         self.id = data['id']
-        self.datetime = data['datetime']
         self.status = data['status']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
@@ -20,7 +19,8 @@ class Status:
 
     @classmethod
     def get_all_statuses(cls):
-        query = "SELECT * FROM statuses;"
+        query = """SELECT * FROM statuses
+        JOIN users on users.id = statuses.user_id;"""
         status_data:list[dict] = connectToMySQL(db).query_db(query)
         status_objects:list[Status] = []
         for status in status_data:
@@ -49,7 +49,7 @@ class Status:
     def create_status(cls,stat):
         if not cls.validate_status(stat):
             return False
-        query = "INSERT INTO statuses (datetime, status, created_at, updated_at, user_id) VALUES (NOW(), %(status)s, NOW(), NOW(), %(user_id)s);"
+        query = "INSERT INTO statuses (status, created_at, updated_at, user_id) VALUES (%(status)s, NOW(), NOW(), %(user_id)s);"
         new_status_id = connectToMySQL(db).query_db(query, stat)
         new_status = cls.get_by_id(new_status_id)
         return new_status

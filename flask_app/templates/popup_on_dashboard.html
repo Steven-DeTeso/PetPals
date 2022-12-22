@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>
+<body onload="{{ 'openPopUpOnLoad()' }}">
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container-fluid">
         <a class="navbar-brand" href="/dashboard">PetPals</a>
@@ -35,8 +35,7 @@
         </div>
     </nav>
     <div>
-        <img src="/avatar_img.jpeg" alt="">
-        <h3>{{user.first_name}} {{user.last_name}}'s Profile</h3>
+        <img src="" alt="">
         <form action="/create_new_status" method="post">
             <div class="form-group">
                 <textarea type="text" name="status" class="form-control" placeholder="Say something..."></textarea>
@@ -49,20 +48,14 @@
         <a href="/new-event">Create an Event</a>
     </div>
     <div>
+        <h3>Statuses and Events Feed</h3>
+        <img src="/avatar_img.jpeg" alt="">
         {% for status in statuses %}
-        <p> {{status.status}} <br> {{status.updated_at}} </p>
+        <p>{{status.status}}</p>
+        <p>{{user.first_name}} {{user.last_name}} says...</p>
+        <p>{{user.updated_at}}</p><br>
         {% endfor %}
     </div>
-    <div>
-        <h3>{{user.first_name}}'s Events</h3>
-        {% for event in events %}
-            {% if user.id == event.user_id %}
-            <p><strong>{{event.name}}</strong></p>
-            <p><strong>When: </strong>{{event.date}}</p>
-            <p><strong>Where: </strong>{{event.location}}</p>
-            <p><strong>Details: </strong>{{event.details}}</p>
-            {% endif %}
-        {% endfor %}
-    </div>   
+    <script src="{{ url_for('static', filename='flask_app/static/popups.js') }}"></script>
 </body>
 </html>

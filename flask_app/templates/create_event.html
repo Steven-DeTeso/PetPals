@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="/flask_app/static/popups.JS"></script>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -56,6 +57,7 @@
                 <label for="details">Details:</label>
                 <textarea type="text" name="details" class="form-control"></textarea>
             </div>
+            <input type="hidden" name="user_id" value="{{user.id}}">
             <button type="submit">Submit</button>
         </form>
     </div>

@@ -40,7 +40,6 @@
             <div class="form-group">
                 <textarea type="text" name="status" class="form-control" placeholder="Say something..."></textarea>
                 <!-- do we need datetime recorded in db 'statuses' table, it has created/updated_at already? -->
-                <input type="hidden" name="datetime">
                 <input type="hidden" name="user_id" value="{{user.id}}">
                 <button type="submit">Post</button>
             </div>
@@ -52,12 +51,26 @@
         <h3>Statuses and Events Feed</h3>
         <img src="/avatar_img.jpeg" alt="">
         {% for status in statuses %}
-        <p>{{status.details}}</p>
-        <p>{{status.friend.name}} says...</p><br>
-            {% if event == friend.event %}
-        <p>{{friend.event}}</p>
-        {% else %}
-        <p>{{friend.status}}</p>
+        <p>{{status.status}}</p>
+        <p>{{user.first_name}} {{user.last_name}} says...</p>
+        <p>{{user.updated_at}}</p><br>
+        {% endfor %}
+    </div>
+    <div>
+        <h3>{{user.first_name}}'s Events</h3>
+        {% for event in events %}
+            {% if session['user_id'] == event.user_id %}
+            <p><strong>{{event.name}}</strong></p>
+            <p><strong>When: </strong>{{event.date}}</p>
+            <p><strong>Where: </strong>{{event.location}}</p>
+            <p><strong>Details: </strong>{{event.details}}</p>
+            <p>
+                <form action="/leave_event" method="post">
+                    <input type="hidden" value="{{session['user_id']}}" name="user_id">
+                    <input type="hidden" value="{{event.id}}" name="event_id">
+                    <input type="submit" value="Leave">
+                </form>
+            </p>
             {% endif %}
         {% endfor %}
     </div>

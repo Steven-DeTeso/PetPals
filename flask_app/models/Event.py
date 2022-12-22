@@ -24,8 +24,6 @@ class Event:
         self.updated_at = data['updated_at']
         self.user = None
 
-    # query below works in mysql workbench, but a lot of fields are not populated.
-    # also can remove fields email and password because that info is not needed. 
     @classmethod
     def get_all_events(cls):
         query = """SELECT events.id as event_id, 
@@ -64,22 +62,38 @@ class Event:
         event_id = connectToMySQL(db).query_db(query, event_dict)
         print(event_id)
         event = cls.get_by_id(event_id)
+        print(event)
+        print(f'whats wrong?')
         return event
+
+    @classmethod
+    def get_most_recent_event(cls):
+        query = """SELECT events.id as event_id, 
+        created_at, 
+        updated_at, 
+        name, 
+        date,
+        time, 
+        location,
+        details FROM events ORDER BY id DESC LIMIT 1;"""
+        current_event = connectToMySQL(db).query_db(query)
+        current_event = current_event[0]
+        event_object = cls(current_event)
+        return event_object
+
 
     # This method has some issues that need to be addressed. 
     @classmethod
     def get_by_id(cls, event_id):
         print(f"get event by id {event_id}")
         data = {"id": event_id}
-        # Error with query statement below, Selecting from events table but have 'num_applied' as an unknown column name. 
-        query = """SELECT events.id as event_id, events.created_at, events.updated_at, name, date, time, location, users.id as user_id, num_applied, num_of_users, details, first_name, last_name, email, password, users.created_at as uc, users.updated_at as uu 
+        query = """SELECT events.id as event_id, events.created_at, events.updated_at, name, date, time, location, users.id as user_id, details, first_name, last_name, email, password, users.created_at as uc, users.updated_at as uu 
         FROM events 
         LEFT JOIN users_events ON events.id = users_events.event_id 
         LEFT JOIN users ON users.id = users_events.user_id WHERE events.id = %(id)s;"""
         result = connectToMySQL(db).query_db(query,data)
         result = result[0]
         event = cls(result)
-        print(event)
         event.user = User.User(
             {
                     "id": result["user_id"],
@@ -91,7 +105,7 @@ class Event:
                     "updated_at": result["uu"]
             }
         )
-        print(event.user)
+        print(f'almost there')
         return event
 
     @classmethod
@@ -106,16 +120,21 @@ class Event:
         print(event_dict)
         query = "INSERT INTO users_events (user_id, event_id) VALUES (%(user_id)s, %(event_id)s);"
         connectToMySQL(db).query_db(query, event_dict)
-        query = "UPDATE events SET num_applied = num_applied + 1 WHERE id = %(event_id)s;"
-        connectToMySQL(db).query_db(query, event_dict)
+        result = connectToMySQL(db).query_db(query, event_dict)
+        print(result)
+
+        # removed code below, for now, will integrate if events will have limits to them in the future.
+        # query = "UPDATE events SET num_applied = num_applied + 1 WHERE id = %(event_id)s;"
+        # connectToMySQL(db).query_db(query, event_dict)
 
     @classmethod
     def leave_event(cls, event_dict):
         print(event_dict)
         query = "DELETE FROM users_events WHERE user_id = %(user_id)s AND event_id = %(event_id)s"
         connectToMySQL(db).query_db(query, event_dict)
-        query = "UPDATE events SET num_applied = num_applied - 1 WHERE id = %(event_id)s;"
-        connectToMySQL(db).query_db(query, event_dict)
+        # removed code below, for now, will integrate if events will have limits to them in the future.
+        # query = "UPDATE events SET num_applied = num_applied - 1 WHERE id = %(event_id)s;"
+        # connectToMySQL(db).query_db(query, event_dict)
 
     @staticmethod
     def is_valid(event_dict):

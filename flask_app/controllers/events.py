@@ -35,7 +35,19 @@ def eventlist():
     events = Event.get_all_events()
     return render_template('events.html', user=user, events=events)
 
+@app.route('/confirm_event')
+def confirm_event():
+    if 'user_id' not in session:
+        flash("You must be logged in to edit a user's account.")
+        return redirect('/')
+    user = User.get_by_id(session['user_id'])
+    events = Event.get_most_recent_event()
+    return render_template('confirm_event.html', user=user, events=events)
 
+# @app.route("/route/to/popup")
+# def show_popup():
+#     return "<h1>Hello, Pop-Up Window!</h1>"
+# i will try to get the pop up to work in the future, for now I'm going the simple route
 
 ### POST METHODS ###
 
@@ -46,8 +58,8 @@ def f_create_a_event():
         return redirect('/')
     valid_event = Event.create_valid_event(request.form)
     if valid_event:
-        return redirect('/dashboard')
-    return redirect('/new-tournament')
+        return redirect('/confirm_event')
+    return redirect('/dashboard')
     
 @app.route('/join_event', methods=['POST'])
 def join_event():
@@ -55,7 +67,7 @@ def join_event():
         flash("You must be logged in to edit a user's account.")
         return redirect('/')
     Event.join_event(request.form)
-    return redirect('/event-search')
+    return redirect('/dashboard')
 
 @app.route('/leave_event', methods=['POST'])
 def leave_event():
@@ -63,7 +75,7 @@ def leave_event():
         flash("You must be logged in to edit a user's account.")
         return redirect('/')
     Event.leave_event(request.form)
-    return redirect('/event-search')
+    return redirect('/dashboard')
 
 # When creating the form for the Join or leave routes this is the form i created in my solo for reference:
 
