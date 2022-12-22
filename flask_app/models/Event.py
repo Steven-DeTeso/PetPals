@@ -18,7 +18,7 @@ class Event:
         self.date = data['date']
         self.time = data['time']
         self.location = data['location']
-        self.user_id = None
+        self.user_id = data['user_id']
         self.details = data['details']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
