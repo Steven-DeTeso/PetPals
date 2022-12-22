@@ -39,6 +39,9 @@
         <form action="/create_new_status" method="post">
             <div class="form-group">
                 <textarea type="text" name="status" class="form-control" placeholder="Say something..."></textarea>
+                <!-- do we need datetime recorded in db 'statuses' table, it has created/updated_at already? -->
+                <input type="hidden" name="datetime">
+                <input type="hidden" name="user_id" value="{{user.id}}">
                 <button type="submit">Post</button>
             </div>
         </form>

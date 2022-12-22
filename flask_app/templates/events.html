@@ -40,14 +40,15 @@
     </div>
     <div>
         <h3><u>Events Feed</u></h3>
+        <h5>{{user.first_name}} {{user.last_name}}'s Event</h5>
         {% for event in events %}
         <div>
-            <h5>{{friend.first_name}} {{friend.last_name}}'s Event</h5>
-            <p><strong>{friend.event.name}</strong></p>
-            <p><strong>When: </strong>{friend.event.date}</p>
-            <p><strong>Where: </strong>{friend.event.location}</p>
-            <p><strong>Details: </strong>{friend.event.details}</p>
-        {% endfor %}
+            <p><strong>{{event.name}}</strong></p>
+            <p><strong>Date: </strong>{{event.date}}</p>
+            <p><strong>Time: </strong>{{event.time}}</p>
+            <p><strong>Where: </strong>{{event.location}}</p>
+            <p><strong>Details: </strong>{{event.details}}</p>
+            {% endfor %}
         </div>
     </div>
 </body>
