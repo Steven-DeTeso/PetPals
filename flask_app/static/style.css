@@ -33,6 +33,10 @@ nav{
   font-size: 40px;
 }
 
+#stockAvatar{
+  width: 50px;
+}
+
 .indiefont{
   font-family: IndieFlower;
 }

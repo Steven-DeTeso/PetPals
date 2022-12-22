@@ -51,10 +51,12 @@
     </div>
     <div>
         <h3 class="ms-3"><u>Statuses and Events Feed</u></h3>
-        <img src="/avatar_img.jpeg" alt="">
     </div>
     {% for status in statuses %}
-    <p class="ms-3"><u>{{user.first_name}} {{user.last_name}}</u> says...</p>
+    <div class="d-flex">
+        <img src="../static/avatar_img.jpeg" alt="" id="stockAvatar">
+        <p class="ms-3"><u>{{user.first_name}} {{user.last_name}}</u> says...</p>
+    </div>
     <div class="statusDashUpdates">
         <p>{{status.status}}</p>
         <p>{{user.updated_at}}</p><br>
