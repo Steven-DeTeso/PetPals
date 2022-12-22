@@ -40,7 +40,8 @@
     <div>
         {% for friend in friends %}
         <ul>
-            <li>{{user.friend.first_name}} {{user.friend.last_name}}</li>
+            <li><img src="/avatar_img.jpeg" alt="">
+                {{user.friend.first_name}} {{user.friend.last_name}}</li>
         </ul>
         {% endfor %}
     </div>
