@@ -8,6 +8,34 @@ bcrypt = Bcrypt(app)
 
 db = "PetsOnly"
 
+class Event_nouserid:
+    def __init__(self, data:dict):
+        self.id = data['event_id']
+        self.name = data['name']
+        self.date = data['date']
+        self.time = data['time']
+        self.location = data['location']
+        self.details = data['details']
+        self.created_at = data['created_at']
+        self.updated_at = data['updated_at']
+        self.user = None
+
+    @classmethod
+    def get_most_recent_event(cls):
+        query = """SELECT events.id as event_id, 
+        created_at, 
+        updated_at, 
+        name, 
+        date,
+        time, 
+        location, 
+        details FROM events
+        ORDER BY id DESC LIMIT 1;"""
+        current_event = connectToMySQL(db).query_db(query)
+        current_event = current_event[0]
+        event_object = cls(current_event)
+        return event_object
+
 class Event:
     def __init__(self, data:dict):
         self.id = data['event_id']
@@ -63,20 +91,6 @@ class Event:
         print(f'whats wrong?')
         return event
 
-    @classmethod
-    def get_most_recent_event(cls):
-        query = """SELECT events.id as event_id, 
-        created_at, 
-        updated_at, 
-        name, 
-        date,
-        time, 
-        location,
-        details FROM events ORDER BY id DESC LIMIT 1;"""
-        current_event = connectToMySQL(db).query_db(query)
-        current_event = current_event[0]
-        event_object = cls(current_event)
-        return event_object
 
 
     # This method has some issues that need to be addressed. 
@@ -117,8 +131,7 @@ class Event:
         print(event_dict)
         query = "INSERT INTO users_events (user_id, event_id) VALUES (%(user_id)s, %(event_id)s);"
         connectToMySQL(db).query_db(query, event_dict)
-        result = connectToMySQL(db).query_db(query, event_dict)
-        print(result)
+
 
         # removed code below, for now, will integrate if events will have limits to them in the future.
         # query = "UPDATE events SET num_applied = num_applied + 1 WHERE id = %(event_id)s;"

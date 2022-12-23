@@ -1,7 +1,7 @@
 from flask_app import app
 from flask import Flask, render_template, redirect, request, session, flash
 from flask_app.models.User import User
-from flask_app.models.Event import Event
+from flask_app.models.Event import Event, Event_nouserid
 from flask_app.models.Friend import Friend
 from flask_app.models.Status import Status
 
@@ -41,13 +41,9 @@ def confirm_event():
         flash("You must be logged in to edit a user's account.")
         return redirect('/')
     user = User.get_by_id(session['user_id'])
-    events = Event.get_most_recent_event()
+    events = Event_nouserid.get_most_recent_event()
     return render_template('confirm_event.html', user=user, events=events)
 
-# @app.route("/route/to/popup")
-# def show_popup():
-#     return "<h1>Hello, Pop-Up Window!</h1>"
-# i will try to get the pop up to work in the future, for now I'm going the simple route
 
 ### POST METHODS ###
 

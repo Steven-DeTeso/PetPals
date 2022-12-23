@@ -1,7 +1,29 @@
 from flask_app.config.mysqlconnection import connectToMySQL
+from flask_app.models.User import User
 from flask import flash
 
 db = "PetsOnly"
+
+class Status_getall:
+    def __init__(self, data:dict):
+        self.id = data['id']
+        self.status = data['status']
+        self.created_at = data['created_at']
+        self.updated_at = data['updated_at']
+        self.user_id = None
+        self.first_name = data['first_name']
+        self.last_name = data['last_name']
+
+    @classmethod
+    def get_all_statuses(cls):
+        query = """SELECT * FROM statuses
+JOIN users on users.id = statuses.user_id
+ORDER BY statuses.id DESC;"""
+        status_data:list[dict] = connectToMySQL(db).query_db(query)
+        status_objects:list[Status] = []
+        for status in status_data:
+            status_objects.append(cls(status))
+        return status_objects
 
 class Status:
     def __init__(self, data:dict):
@@ -12,15 +34,6 @@ class Status:
         self.user_id = None
         # This could cause and issue later and if we are looking to debug this area we should probably look at the user_id relationship to users.id and the controller code that coincides with it.
 
-    @classmethod
-    def get_all_statuses(cls):
-        query = """SELECT * FROM statuses
-        JOIN users on users.id = statuses.user_id;"""
-        status_data:list[dict] = connectToMySQL(db).query_db(query)
-        status_objects:list[Status] = []
-        for status in status_data:
-            status_objects.append(cls(status))
-        return status_objects
     
     @classmethod
     def get_by_id(cls, status_id):
