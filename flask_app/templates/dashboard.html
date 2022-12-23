@@ -55,7 +55,7 @@
     {% for status in statuses %}
     <div class="d-flex">
         <img src="../static/avatar_img.jpeg" alt="" id="stockAvatar">
-        <p class="ms-3"><u>{{user.first_name}} {{user.last_name}}</u> says...</p>
+        <p class="ms-3"><u>{{status.first_name}} {{status.last_name}}</u> says...</p>
     </div>
     <div class="statusDashUpdates">
         <p>{{status.status}}</p>

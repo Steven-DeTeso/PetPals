@@ -2,7 +2,7 @@ from flask_app import app
 from flask import Flask, render_template, redirect, request, session, flash
 from flask_app.models.User import User
 from flask_app.models.Event import Event
-from flask_app.models.Status import Status
+from flask_app.models.Status import Status, Status_getall
 from flask_app.models.Friend import Friend
 
 ### RENDERING METHODS ###
@@ -45,7 +45,7 @@ def dashboard():
         return redirect('/')
     user = User.get_by_id(session['user_id'])
     events = Event.get_all_events()
-    statuses = Status.get_all_statuses()
+    statuses = Status_getall.get_all_statuses()
     return render_template('dashboard.html', user=user, events=events, statuses=statuses)
 
 @app.route('/profile')
