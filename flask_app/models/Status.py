@@ -17,8 +17,8 @@ class Status_getall:
     @classmethod
     def get_all_statuses(cls):
         query = """SELECT * FROM statuses
-JOIN users on users.id = statuses.user_id
-ORDER BY statuses.id DESC;"""
+        JOIN users on users.id = statuses.user_id
+        ORDER BY statuses.id DESC;"""
         status_data:list[dict] = connectToMySQL(db).query_db(query)
         status_objects:list[Status] = []
         for status in status_data:

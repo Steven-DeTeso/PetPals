@@ -55,7 +55,7 @@ def render_profile():
         return redirect('/')
     user = User.get_by_id(session['user_id'])
     events = Event.get_all_events()
-    statuses = Status.get_all_statuses()
+    statuses = Status_getall.get_all_statuses()
     return render_template('profile.html', user=user, events=events, statuses=statuses)
 
 
