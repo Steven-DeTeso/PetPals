@@ -99,13 +99,21 @@ nav{
 
 #statusDash{
   width: 300px;
-  height: 100px;
+  height: 40px;
 }
 
 #statusBar {
   border-bottom: 2px solid black;
   margin-bottom: 20px;
   padding-bottom: 20px;
+}
+
+.dashboard{
+  display: flex;
+}
+
+.dash-left, .dash-right{
+  flex: auto;
 }
 
 .statusDashUpdates{

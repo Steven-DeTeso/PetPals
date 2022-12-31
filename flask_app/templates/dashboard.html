@@ -49,22 +49,24 @@
         <p class="orDash my-auto ms-3">OR</p>
         <a href="/new-event" class="createDash my-auto ms-3">Create an Event</a>
     </div>
-    <div>
-        <h3 class="ms-3"><u>Statuses and Events Feed</u></h3>
-    </div>
-    {% for status in statuses %}
-    <div class="d-flex">
-        <img src="../static/avatar_img.jpeg" alt="" id="stockAvatar">
-        <p class="ms-3"><u>{{status.first_name}} {{status.last_name}}</u> says...</p>
-    </div>
-    <div class="statusDashUpdates">
-        <p>{{status.status}}</p>
-        <p>{{user.updated_at}}</p><br>
-    </div>
-        {% endfor %}
-    <div>
-        <h3><u>{{user.first_name}}'s Upcoming Events</u></h3>
-        {% for event in events %}
+    <div class="dashboard">
+        <div class="dash-left">
+            <h3 class="ms-3"><u>Statuses and Events Feed</u></h3>
+            {% for status in statuses %}
+            <div class="d-flex">
+                <img src="../static/avatar_img.jpeg" alt="" id="stockAvatar">
+                <p class="ms-3"><u>{{status.first_name}} {{status.last_name}}</u> says...</p>
+                <p>{{status.status}}</p>
+            </div>
+            {% endfor %}
+            {% if session['user_id'] == status.user_id %}
+            <a href="http:/">Delete</a>
+            <!-- need to add in delete function if user who logged in is same as creator -->
+            {% endif %}
+        </div>
+        <div class="dash-right">
+            <h3><u>{{user.first_name}}'s Upcoming Events</u></h3>
+            {% for event in events %}
             {% if session['user_id'] == event.user_id %}
             <p><strong>{{event.name}}</strong></p>
             <p><strong>When: </strong>{{event.date}}</p>
@@ -78,7 +80,9 @@
                 </form>
             </p>
             {% endif %}
-        {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
     </div>
 </body>
 </html>
