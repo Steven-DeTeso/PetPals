@@ -44,8 +44,11 @@ def dashboard():
         flash("You must be logged in to edit a user's account.")
         return redirect('/')
     user = User.get_by_id(session['user_id'])
+    # print("session id right below")
+    # print(session['user_id'])
     events = Event.get_all_events()
     statuses = Status_getall.get_all_statuses()
+    # print(Status_getall.get_all_statuses()[0].user_id)
     return render_template('dashboard.html', user=user, events=events, statuses=statuses)
 
 @app.route('/profile')

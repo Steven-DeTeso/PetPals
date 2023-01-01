@@ -43,23 +43,26 @@
     </div>
     <div>
         <h3><u>Events Feed</u></h3>
-        <h5>{{user.first_name}} {{user.last_name}}'s Event</h5>
+        <h5>List of Events</h5>
         {% for event in events %}
-        <div>
-            <p><strong>{{event.name}}</strong></p>
-            <p><strong>Date: </strong>{{event.date}}</p>
-            <p><strong>Time: </strong>{{event.time}}</p>
-            <p><strong>Where: </strong>{{event.location}}</p>
-            <p><strong>Details: </strong>{{event.details}}</p>
-            <p>
-                {% if session['user_id'] != event.user_id %}
-                <form action="/join_event" method="post">
-                    <input type="hidden" value="{{session['user_id']}}" name="user_id">
-                    <input type="hidden" value="{{event.id}}" name="event_id">
-                    <input type="submit" value="Join">
-                </form>
-                {%endif%}
-            </p>
+        <div class="flexbox">
+            <div class="eventBox">
+                <p><strong>Host: </strong>{{event.user_name}}</p>
+                <p><strong>Name: </strong>{{event.name}}</p>
+                <p><strong>Date: </strong>{{event.date}}</p>
+                <p><strong>Time: </strong>{{event.time}}</p>
+                <p><strong>Where: </strong>{{event.location}}</p>
+                <p><strong>Details: </strong>{{event.details}}</p>
+                <p>
+                    {% if session['user_id'] != event.user_id %}
+                    <form action="/join_event" method="post">
+                        <input type="hidden" value="{{session['user_id']}}" name="user_id">
+                        <input type="hidden" value="{{event.id}}" name="event_id">
+                        <input type="submit" value="Join">
+                    </form>
+                    {%endif%}
+                </p>
+            </div>
             {% endfor %}
         </div>
     </div>

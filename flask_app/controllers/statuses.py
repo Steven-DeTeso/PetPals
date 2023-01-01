@@ -3,7 +3,7 @@ from flask import Flask, render_template, redirect, request, session, flash
 from flask_app.models.User import User
 from flask_app.models.Event import Event
 from flask_app.models.Friend import Friend
-from flask_app.models.Status import Status
+from flask_app.models.Status import Status, Status_getall
 
 ## POST METHODS ##
 
@@ -17,4 +17,11 @@ def create_new_status():
     if valid_status:
         print('valid status')
         return redirect('/dashboard')
+    return redirect('/dashboard')
+
+@app.route('/delete/<int:id>')
+def delete_status(id):
+    if 'user_id' not in session:
+        return redirect('/')
+    Status_getall.delete_status({'id':id})
     return redirect('/dashboard')

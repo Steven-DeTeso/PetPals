@@ -10,7 +10,7 @@ class Status_getall:
         self.status = data['status']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
-        self.user_id = None
+        self.user_id = data['user_id']
         self.first_name = data['first_name']
         self.last_name = data['last_name']
 
@@ -24,6 +24,14 @@ class Status_getall:
         for status in status_data:
             status_objects.append(cls(status))
         return status_objects
+
+    @classmethod
+    def delete_status(cls, data):
+        query = """
+        DELETE FROM statuses
+        WHERE id = %(id)s;
+        """
+        return connectToMySQL(db).query_db(query, data)
 
 class Status:
     def __init__(self, data:dict):
