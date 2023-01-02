@@ -52,20 +52,10 @@ class Event:
     @classmethod
     def get_all_events(cls):
         query = """SELECT events.id as event_id, 
-        events.created_at, 
-        events.updated_at, 
-        name, 
-        date,
-        time, 
-        location, 
+        events.created_at, events.updated_at, 
+        name, date, time, location, 
         users.id as user_id, 
-        details, 
-        first_name, 
-        last_name, 
-        email, 
-        password, 
-        users.created_at as uc, 
-        users.updated_at as uu 
+        details, first_name, last_name, email
         FROM events 
         LEFT JOIN users_events 
         ON events.id = users_events.event_id 
@@ -75,6 +65,7 @@ class Event:
         event_objects:list[Event] = []
         for event in results:
             event_objects.append(cls(event))
+        # issue here with not getting 'user_id' from event creation post form. 
         print([obj.user_id for obj in event_objects])
         return event_objects
 

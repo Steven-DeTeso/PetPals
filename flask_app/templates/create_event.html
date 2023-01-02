@@ -71,6 +71,8 @@
                 <label for="details">Details:</label>
                 <textarea type="text" name="details" class="form-control"></textarea>
             </div>
+            <input type="hidden" name="first_name" value="{{user.first_name}}">
+            <input type="hidden" name="last_name" value="{{user.last_name}}">
             <input type="hidden" name="user_id" value="{{user.id}}">
             <button type="submit" class="btn btn-success mt-2">Post Event!</button>
         </form>

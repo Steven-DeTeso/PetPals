@@ -14,7 +14,7 @@ def newevent():
         print('test')
         return redirect('/')
     user = User.get_by_id(session['user_logged_in']['id'])
-    print('test2')
+    print(user)
     return render_template('create_event.html', user=user)
 
 @app.route('/eventinfo/<int:event_id>')
@@ -22,7 +22,7 @@ def eventinfo(event_id):
     if 'user_logged_in' not in session:
         flash("You must be logged in to edit a user's account.")
         return redirect('/')
-    user = User.get_by_id(session['user_logged_in'])
+    user = User.get_by_id(session['user_logged_in']['id'])
     event = Event.get_by_id(event_id)
     return render_template('Event_Information.HTML', user=user, event = event)
 
@@ -31,7 +31,7 @@ def eventlist():
     if 'user_logged_in' not in session:
         flash("You must be logged in to edit a user's account.")
         return redirect('/')
-    user = User.get_by_id(session['user_logged_in'])
+    user = User.get_by_id(session['user_logged_in']['id'])
     events = Event.get_all_events()
     return render_template('events.html', user=user, events=events)
 
@@ -40,7 +40,7 @@ def confirm_event():
     if 'user_logged_in' not in session:
         flash("You must be logged in to edit a user's account.")
         return redirect('/')
-    user = User.get_by_id(session['user_logged_in'])
+    user = User.get_by_id(session['user_logged_in']['id'])
     events = Event_nouserid.get_most_recent_event()
     return render_template('confirm_event.html', user=user, events=events)
 
