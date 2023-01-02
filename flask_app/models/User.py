@@ -1,9 +1,7 @@
-from sqlite3 import connect
 from flask_app import app
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash
 from flask_bcrypt import Bcrypt
-from flask_app.models import Event
 import re
 
 bcrypt = Bcrypt(app)
@@ -55,7 +53,7 @@ class User:
         return cls(result[0])
 
     @classmethod
-    def update_user_account(cls, user_dict, session_id):
+    def update_user_account(cls, user_dict):
         if not cls.valid_user_update(user_dict):
             return False
         query = "UPDATE users SET first_name = %(first_name)s, last_name = %(last_name)s, email = %(email)s WHERE id = %(id)s;"
@@ -63,7 +61,7 @@ class User:
         return user
 
     @classmethod
-    def create_user(cls,user):
+    def create_user(cls, user:dict):
         if not cls.validate_user(user):
             return False
         pw_hash = bcrypt.generate_password_hash(user['password'])
@@ -81,12 +79,14 @@ class User:
         password_valid = True
         if not existing_user:
             valid = False
+            flash("You need to register first!", 'login')
         else:
             password_valid = bcrypt.check_password_hash(existing_user.password, user_input['password'])
             if not password_valid:
                 valid = False
+                flash("The password you entered is incorrect!", 'login')
         if not valid:
-            flash("Your credentials do no match our records.")
+            flash("Your credentials do no match our records.", 'login')
             return False
         return existing_user
 
@@ -96,25 +96,25 @@ class User:
         query = "SELECT * FROM users WHERE email = %(email)s;"
         result = connectToMySQL(db).query_db(query,user)
         if len(result) >= 1:
-            flash("Email already in use. Please Log In.")
+            flash("Email already in use. Please Log In.", 'register')
             is_valid=False
-        if not EMAIL_REGEX.match(user['email']):
-            flash("Invalid email address!")
+        if not EMAIL_REGEX.match(user.get('email')):
+            flash("Invalid email address!", 'register')
             is_valid = False
         if len(user['first_name']) < 3:
-            flash("First name must be at least 3 characters.")
+            flash("First name must be at least 3 characters.", 'register')
             is_valid = False
         if len(user['last_name']) < 3:
-            flash("Last Name must be at least 3 characters.")
+            flash("Last Name must be at least 3 characters.", 'register')
             is_valid = False
         if len(user['email']) < 5:
-            flash("Email address must be at least 5 characters.")
+            flash("Email address must be at least 5 characters.", 'register')
             is_valid = False
         if len(user['password']) < 8:
-            flash("Password must be at least 8 characters long")
+            flash("Password must be at least 9 characters long", 'register')
             is_valid = False
         if user['password'] != user['confirm_password']:
-            flash("Passwords do not match.")
+            flash("Passwords do not match.", 'register')
             is_valid = False
         return is_valid
 
@@ -138,4 +138,3 @@ class User:
         if len(user['email']) < 5:
             flash("Email address must be at least 5 characters.")
             is_valid = False
-        return is_valid

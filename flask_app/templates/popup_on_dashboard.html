@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body onload="{{ 'openPopUpOnLoad()' }}">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+        <a class="navbar-brand" href="/dashboard">PetPals</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/dashboard">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/profile">Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/friends">Friends</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/event-list">Events</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Logout</a>
+            </li>
+            </ul>
+        </div>
+        </div>
+    </nav>
+    <div>
+        <img src="" alt="">
+        <form action="/create_new_status" method="post">
+            <div class="form-group">
+                <textarea type="text" name="status" class="form-control" placeholder="Say something..."></textarea>
+                <!-- do we need datetime recorded in db 'statuses' table, it has created/updated_at already? -->
+                <input type="hidden" name="user_id" value="{{user.id}}">
+                <button type="submit">Post</button>
+            </div>
+        </form>
+        <p>OR</p>
+        <a href="/new-event">Create an Event</a>
+    </div>
+    <div>
+        <h3>Statuses and Events Feed</h3>
+        <img src="/avatar_img.jpeg" alt="">
+        {% for status in statuses %}
+        <p>{{status.status}}</p>
+        <p>{{user.first_name}} {{user.last_name}} says...</p>
+        <p>{{user.updated_at}}</p><br>
+        {% endfor %}
+    </div>
+    <script src="{{ url_for('static', filename='flask_app/static/popups.js') }}"></script>
+</body>
+</html>

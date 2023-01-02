@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Event</title>
+</head>
+<body>
+    <div>
+        <h1>Are you sure you want to create this event?</h1>
+        <form action="/join_event" method="post">
+            <input type="hidden" value="{{session['user_id']}}" name="user_id">
+            <input type="hidden" value="{{events.id}}" name="event_id">
+            <input type="submit" value="Yes.">
+        </form>
+    </div>
+</body>
+</html>

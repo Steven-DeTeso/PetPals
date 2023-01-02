@@ -4,55 +4,86 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Dashboard</title>
 </head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<body class="container">
+    <nav class="navbar navbar-expand-xl navbar-expand-xl">
         <div class="container-fluid">
-        <a class="navbar-brand" href="/dashboard">PetPals</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <img class="pawprint" src="static/pngwing.com.png">
+            <a class="navbar-brand logo" href="/dashboard">PetPals</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/dashboard">Home</a>
+                <a class="nav-link active indiefont" aria-current="page" href="/dashboard">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/">Profile</a>
+                <a class="nav-link indiefont" href="/profile">Profile</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/">Friends</a>
+                <a class="nav-link indiefont" href="/friends">Friends</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/">Events</a>
+                <a class="nav-link indiefont" href="/event-list">Events</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/logout">Logout</a>
+                <a class="nav-link indiefont" href="/logout">Logout</a>
             </li>
             </ul>
         </div>
         </div>
     </nav>
-    <div>
+    <div class="flex-container" id="statusBar">
         <img src="" alt="">
-        <div class="form-group">
-            <textarea type="text" name="status" class="form-control">Say something...</textarea>
-        </div>
-        <p>OR</p>
-        <a href="/">Create an Event</a>
+        <form action="/create_new_status" method="post">
+            <div class="form-group d-flex">
+                <textarea type="text" name="status" class="form-control" placeholder="Say something..." id="statusDash"></textarea>
+                <input type="hidden" name="user_id" value="{{user.id}}">
+                <button type="submit" class="btn btn-success mx-2" id="btnDash">Post</button>
+            </div>
+        </form>
+        <p class="orDash my-auto ms-3">OR</p>
+        <a href="/new-event" class="createDash my-auto ms-3">Create an Event</a>
     </div>
-    <div>
-        <h3>Statuses and Events Feed</h3>
-        <img src="" alt="">
-        {% for status in statuses %}
-        <p>{{status.friend.name}} says...</p><br>
-            {{% if event == friend.event %}}
-        <p>{{friend.event}}</p>
-        {% else %}
-        <p>{{friend.status}}</p>
-        {% endif %}
-        {% endfor %}
+    <div class="dashboard">
+        <div class="dash-left">
+            <h3 class="ms-3"><u>Statuses and Events Feed</u></h3>
+            {% for status in statuses %}
+            <div class="d-flex">
+                <img src="../static/avatar_img.jpeg" alt="" id="stockAvatar">
+                <p class="ms-3"><u>{{status.first_name}} {{status.last_name}}</u> says...</p>
+                <p>{{status.status}}</p>
+                {% if session['user_id'] == status.user_id %}
+                <a href="/delete/{{status.id}}" class="btn btn-outline-danger ms-3">Delete</a>
+                <!-- need to add in delete function if user who logged in is same as creator -->
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        <div class="dash-right">
+            <h3><u>{{user.first_name}}'s Upcoming Events</u></h3>
+            {% for event in events %}
+            {% if session['user_id'] == event.user_id %}
+            <p><strong>Host: </strong>{{event.user_name}}</p>
+            <p><strong>Name: </strong>{{event.name}}</p>
+            <p><strong>When: </strong>{{event.date}}</p>
+            <p><strong>Where: </strong>{{event.location}}</p>
+            <p><strong>Details: </strong>{{event.details}}</p>
+            <p>
+                <form action="/leave_event" method="post">
+                    <input type="hidden" value="{{session['user_id']}}" name="user_id">
+                    <input type="hidden" value="{{event.id}}" name="event_id">
+                    <input type="submit" value="Leave">
+                </form>
+            </p>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
     </div>
 </body>
 </html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Register & Login</title>
+</head>
+<body class="container">
+    <nav class="navbar navbar-expand-xl navbar-light">
+        <img class="pawprint" src="static/pngwing.com.png" alt="">
+        <h1 class="logo">PetPals</h1>
+    </nav>
+    <div class="flex-container">
+        <div class="flex-child">
+            <h2 class="indiefont tagline">The most wholesome social media on the web!</h2> 
+            <p class="login-left indiefont tag2">PetPals is a social media platform for our pets to make friends! Find events and furry pals near you today!</p>   
+        </div>
+        <div class="flex-child login-right">
+            <form action="register_user" method="post">
+                <h2 id="signUpLogin">Sign Up</h2>
+                {% with messages = get_flashed_messages(category_filter=['register']) %}
+                    {% if messages %}
+                    <div class="alert alert-danger" role="alert">
+                        <strong>INVALID</strong>
+                        {% for message in messages %}
+                        <p>{{message}}</p>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                {% endwith %}
+                <div class="form-group row">
+                    <input type="text" class="form-control col" placeholder="Your first name" name="first_name" id="firstName" required>
+                    <input type="text" class="form-control col" placeholder="Your last name" name="last_name" id="lastName" required>
+                </div>
+                <div class="form-group row mt-2">
+                    <input type="text" class="form-control" placeholder="Your email address" name="email" id="Email" required>
+                </div>
+                <div class="form-group row mt-2">
+                    <input type="password" class="form-control" placeholder="Pick a password" name="password" password="password" id="Password" required>
+                </div>
+                <div class="form-group row mt-2">
+                    <input type="password" class="form-control" placeholder="Confirm password" name="confirm_password" id="confirm_password" required>
+                </div>
+                <p class="mt-2" id="infoLoginReg"><em>Use at least seven letters, one number, and one special character.</em></p>
+                <input type="submit" class="btn btn-primary" value="Register" id="btnLoginReg">
+            </form>
+            <form action="/login" method="post">
+                <h2 id="signUpLogin">Login</h2>
+                {% with messages = get_flashed_messages(category_filter=['login']) %}
+                    {% if messages %}
+                    <div class="alert alert-danger" role="alert">
+                        <strong>INVALID</strong>
+                            {% for message in messages %}
+                            <p>{{message}}</p>
+                            {% endfor %}
+                    </div>
+                    {% endif %}
+                {% endwith %}
+                <div class="form-group row">
+                    <input type="text" name="email" class="form-control" placeholder="Your email adress"> 
+                    <input type="password" name="password" class="form-control mt-2" placeholder="Your password">
+                </div>
+                <div>
+                    <br>
+                    <input type="submit" value="Login" class="btn btn-primary" id="btnLoginReg">
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
