@@ -76,4 +76,3 @@ class Status:
         if len(status['status']) < 2:
             flash("Status must be at least 2 characters long")
             is_valid = False
-        return is_valid

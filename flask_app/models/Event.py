@@ -158,4 +158,3 @@ class Event:
         if len(event_dict["details"]) < 10:
             flash("Details have to be at least 10 characters long.", 'event')
             valid = False
-        return valid
