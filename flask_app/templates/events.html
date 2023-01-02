@@ -47,7 +47,7 @@
         {% for event in events %}
         <div class="flexbox">
             <div class="eventBox">
-                <p><strong>Host: </strong>{{event.user_name}}</p>
+                <p><strong>Host: </strong>{{event.user.first_name}}</p>
                 <p><strong>Name: </strong>{{event.name}}</p>
                 <p><strong>Date: </strong>{{event.date}}</p>
                 <p><strong>Time: </strong>{{event.time}}</p>

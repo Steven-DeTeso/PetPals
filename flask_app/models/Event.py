@@ -48,7 +48,6 @@ class Event:
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
         self.user = None
-        self.user_name = data['first_name'] + ' ' + data['last_name']
 
     @classmethod
     def get_all_events(cls):
