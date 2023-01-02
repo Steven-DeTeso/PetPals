@@ -32,8 +32,7 @@ class User:
     
 
     @classmethod
-    def get_by_email(cls,email):
-
+    def get_by_email(cls, email):
         data = {
             "email" : email
         }
@@ -81,7 +80,7 @@ class User:
             valid = False
             flash("You need to register first!", 'login')
         else:
-            password_valid = bcrypt.check_password_hash(existing_user.password, user_input['password'])
+            password_valid = bcrypt.check_password_hash(existing_user['password'], user_input['password'])
             if not password_valid:
                 valid = False
                 flash("The password you entered is incorrect!", 'login')

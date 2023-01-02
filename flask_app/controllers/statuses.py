@@ -9,7 +9,7 @@ from flask_app.models.Status import Status, Status_getall
 
 @app.route('/create_new_status', methods=['POST'])
 def create_new_status():
-    if 'user_id' not in session:
+    if 'user_logged_in' not in session:
         print('user not in session')
         flash("You must be logged in to edit a user's account.")
         return redirect('/')
@@ -21,7 +21,7 @@ def create_new_status():
 
 @app.route('/delete/<int:id>')
 def delete_status(id):
-    if 'user_id' not in session:
+    if 'user_logged_in' not in session:
         return redirect('/')
     Status_getall.delete_status({'id':id})
     return redirect('/dashboard')
