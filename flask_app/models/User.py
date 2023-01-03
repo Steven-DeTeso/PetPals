@@ -40,7 +40,7 @@ class User:
         result = connectToMySQL(db).query_db(query,data)
         if len(result) < 1:
             return False
-        return cls(result[0])
+        return result[0]
 
     @classmethod
     def get_by_id(cls, user_id):

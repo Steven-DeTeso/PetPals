@@ -52,6 +52,8 @@ def f_create_a_event():
     if 'user_logged_in' not in session:
         flash("You must be logged in to edit a user's account.")
         return redirect('/')
+    print('Printing data entered in event form')
+    print(request.form)
     valid_event = Event.create_valid_event(request.form)
     if not valid_event:
         return redirect('/new-event')
