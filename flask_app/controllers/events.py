@@ -50,7 +50,7 @@ def confirm_event():
 @app.route('/event', methods=['POST'])
 def f_create_a_event():
     if 'user_logged_in' not in session:
-        flash("You must be logged in to edit a user's account.")
+        # flash("You must be logged in to edit a user's account.")
         return redirect('/')
     print('Printing data entered in event form')
     print(request.form)
@@ -64,6 +64,7 @@ def join_event():
     if 'user_logged_in' not in session:
         flash("You must be logged in to edit a user's account.")
         return redirect('/')
+    print(f"Priting join_event method {request.form}")
     Event.join_event(request.form)
     return redirect('/dashboard')
 

@@ -39,7 +39,7 @@
     </nav>
     <div class="flex-container" id="statusBar">
         <img src="" alt="">
-        <form action="/create_new_status" method="post">
+        <form action="/create_new_status" method="POST">
             <div class="form-group d-flex">
                 <textarea type="text" name="status" class="form-control" placeholder="Say something..." id="statusDash"></textarea>
                 <input type="hidden" name="user_id" value="{{user.id}}">
@@ -53,11 +53,11 @@
         <div class="dash-left">
             <h3 class="ms-3"><u>Statuses and Events Feed</u></h3>
             {% for status in statuses %}
-            <div class="d-flex">
+            <div class="d-flex" id="statusPostedOnDash">
                 <img src="../static/avatar_img.jpeg" alt="" id="stockAvatar">
                 <p class="ms-3"><u>{{status.first_name}} {{status.last_name}}</u> says...</p>
                 <p>{{status.status}}</p>
-                {% if session['user_id'] == status.user_id %}
+                {% if session['user_logged_in']['id'] == status.user_id %}
                 <a href="/delete/{{status.id}}" class="btn btn-outline-danger ms-3">Delete</a>
                 <!-- need to add in delete function if user who logged in is same as creator -->
                 {% endif %}
@@ -67,8 +67,8 @@
         <div class="dash-right">
             <h3><u>{{user.first_name}}'s Upcoming Events</u></h3>
             {% for event in events %}
-            {% if session['user_id'] == event.user_id %}
-            <p><strong>Host: </strong>{{event.user_name}}</p>
+            {% if session['user_logged_in']['id'] == event.user_id %}
+            <p><strong>Host: </strong>{{event.user.first_name}} {{event.user.last_name}}</p>
             <p><strong>Name: </strong>{{event.name}}</p>
             <p><strong>When: </strong>{{event.date}}</p>
             <p><strong>Where: </strong>{{event.location}}</p>
