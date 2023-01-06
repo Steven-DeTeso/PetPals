@@ -137,3 +137,5 @@ class User:
         if len(user['email']) < 5:
             flash("Email address must be at least 5 characters.")
             is_valid = False
+
+        return is_valid
