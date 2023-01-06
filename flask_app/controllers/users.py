@@ -63,6 +63,13 @@ def render_profile():
     statuses = Status_getall.get_all_statuses()
     return render_template('profile.html', user=user, events=events, statuses=statuses)
 
+@app.route('/edit-profile')
+def r_edit_profile():
+    if 'user_logged_in' not in session:
+        return redirect('/')
+    user = User.get_by_id(session['user_logged_in']['id'])
+    return render_template('edit_profile.html', user=user)
+
 
 ### POST METHODS ###
 

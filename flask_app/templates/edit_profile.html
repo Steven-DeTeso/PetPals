@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title>Edit Profile</title>
 </head>
-<body>
+<body class="container">
     <nav class="navbar navbar-expand-xl navbar-expand-xl">
         <div class="container-fluid">
             <img class="pawprint" src="static/pngwing.com.png">
@@ -37,19 +37,19 @@
         </div>
         </div>
     </nav>
-    <div>
-        <form action="/user/{{user.id}}/update" method="post">
-            <input type="hidden" name="user_id" value="{{user.user_id}}">
-        <h3>{{user.first_name}} {{user.last_name}}, Edit Your Profile!</h3>
-        <div class="form-group">
-            <label for="first_name">First Name:</label>
-            <input type="text" name="first_name" value="{{user.first_name}}" class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="last_name">Last Name:</label>
-            <input type="text" name="last_name" value="{{user.last_name}}" class="form-control">
-        </div>
-        <a href="/delete/{{user.id}}" method="post">DELETE YOUR PROFILE</a>
+    <div class="col-6 mx-auto">
+            <form action="/user/{{user.id}}/update" method="post">
+                <input type="hidden" name="user_id" value="{{user.id}}">
+            <h3>{{user.first_name}} {{user.last_name}}, Edit Your Profile!</h3>
+            <div class="form-group">
+                <label for="first_name">First Name:</label>
+                <input type="text" name="first_name" value="{{user.first_name}}" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="last_name">Last Name:</label>
+                <input type="text" name="last_name" value="{{user.last_name}}" class="form-control">
+            </div>
+            <a href="/delete/{{user.id}}">DELETE YOUR PROFILE</a>
     </div>
 </body>
 </html>
