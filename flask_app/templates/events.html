@@ -44,15 +44,17 @@
     <div>
         <h3><u>Events Feed</u></h3>
         <h5>List of Events</h5>
+        {% with previous_event = events[0].id %}
         {% for event in events %}
         <div class="flexbox">
+            {% if event.id != previous_event  %}
             <div class="eventBox">
-                <p><strong>Host: </strong>{{event.user.first_name}} {{event.user.last_name}}</p>
                 <p><strong>Name: </strong>{{event.name}}</p>
                 <p><strong>Date: </strong>{{event.date}}</p>
                 <p><strong>Time: </strong>{{event.time}}</p>
                 <p><strong>Where: </strong>{{event.location}}</p>
                 <p><strong>Details: </strong>{{event.details}}</p>
+                {{event.id}}  -----  {{event.id-1}}
                 <p>
                     {% if session['user_logged_in']['id'] != event.user_id %}
                     <form action="/join_event" method="post">
@@ -62,8 +64,11 @@
                     </form>
                     {%endif%}
                 </p>
+            {% endif %}
+            {% set previous_event = event.id %}
             </div>
-            {% endfor %}
+        {% endfor %}
+        {%endwith%}
         </div>
     </div>
 </body>

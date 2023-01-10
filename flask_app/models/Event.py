@@ -71,7 +71,7 @@ class Event:
         ON events.id = users_events.event_id 
         LEFT JOIN users 
         ON users.id = users_events.user_id
-        order by users.created_at ASC;"""
+        order by event_id ASC;"""
         results:list[dict] = connectToMySQL(db).query_db(query)
         event_objects:list[Event] = []
         for event in results:
