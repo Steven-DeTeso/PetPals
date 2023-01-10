@@ -33,7 +33,16 @@ def eventlist():
         return redirect('/')
     user = User.get_by_id(session['user_logged_in']['id'])
     events = Event.get_all_events()
-    return render_template('events.html', user=user, events=events)
+    previous_event = events[0].id-1
+    print('A', previous_event)
+    distinct_events = []
+    for event in events:
+        print('B', previous_event)
+        print('C', event.id)
+        if event.id != previous_event:
+            distinct_events.append(event)
+        previous_event = event.id
+    return render_template('events.html', user=user, events=distinct_events)
 
 @app.route('/confirm_event')
 def confirm_event():
@@ -74,7 +83,7 @@ def leave_event():
         flash("You must be logged in to edit a user's account.")
         return redirect('/')
     Event.leave_event(request.form)
-    return redirect('/dashboard')
+    return redirect('/event-list')
 
 # When creating the form for the Join or leave routes this is the form i created in my solo for reference:
 
