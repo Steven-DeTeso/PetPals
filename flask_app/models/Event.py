@@ -1,6 +1,6 @@
 from flask_app import app
 from flask_app.config.mysqlconnection import connectToMySQL
-from flask import flash
+from flask import flash, session
 from flask_bcrypt import Bcrypt
 from flask_app.models import User
 
@@ -48,33 +48,67 @@ class Event:
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
         self.user = None
+        self.joined_users = []
+        self.logged_in_user_has_joined = False
+
+    def get_joined_users(self, event_id):
+        data = {
+            'event_id': event_id
+        }
+        query = """
+        SELECT * FROM
+        users
+        JOIN
+        users_events 
+        ON users.id = users_events.user_id
+        WHERE users_events.event_id = %(event_id)s;
+        """
+        results = connectToMySQL(db).query_db(query, data)
+        users_who_joined_event = []
+        for row in results:
+            print('E')
+            for key,value in row.items():
+                print(key,'\t\t',value)
+            print('\n')
+            joined_user_obj = User.User(row)
+            users_who_joined_event.append(joined_user_obj)
+            print(users_who_joined_event)
+        return users_who_joined_event
+
 
     @classmethod
     def get_all_events(cls):
-        query = """SELECT events.id as event_id, 
-        events.created_at, 
-        events.updated_at, 
-        name, 
-        date,
-        time, 
-        location, 
-        users.id as user_id, 
-        details, 
-        first_name, 
-        last_name, 
-        email, 
-        password, 
-        users.created_at as uc, 
-        users.updated_at as uu 
+        query = """SELECT *
         FROM events 
         LEFT JOIN users_events 
         ON events.id = users_events.event_id 
         LEFT JOIN users 
-        ON users.id = users_events.user_id;"""
+        ON users.id = users_events.user_id
+        order by event_id ASC;"""
         results:list[dict] = connectToMySQL(db).query_db(query)
         event_objects:list[Event] = []
         for event in results:
-            event_objects.append(cls(event))
+            print('D')
+            for key,value in event.items():
+                print(key,'\t\t',value)
+            print('\n')
+            event_obj = cls(event)
+            event_obj.user = User.User({
+                    "id": event["user_id"],
+                    "first_name": event["first_name"],
+                    "last_name": event["last_name"],
+                    "email": event["email"],
+                    "password": event["password"],
+                    "created_at": event["users.created_at"],
+                    "updated_at": event['users.updated_at']
+            })
+            event_id = event_obj.id
+            event_obj.joined_users = event_obj.get_joined_users(event_id)
+            for user in event_obj.joined_users:
+                if user.id == session['user_logged_in']['id']:
+                    event_obj.logged_in_user_has_joined = True
+            event_objects.append(event_obj)
+        # issue here with not getting 'user_id' from event creation post form. 
         print([obj.user_id for obj in event_objects])
         return event_objects
 
@@ -88,15 +122,13 @@ class Event:
         print(event_id)
         event = cls.get_by_id(event_id)
         print(event)
-        print(f'whats wrong?')
         return event
-
 
 
     # This method has some issues that need to be addressed. 
     @classmethod
     def get_by_id(cls, event_id):
-        print(f"get event by id {event_id}")
+        print(f"Get event by id method activated for event #{event_id}")
         data = {"id": event_id}
         query = """SELECT events.id as event_id, events.created_at, events.updated_at, name, date, time, location, users.id as user_id, details, first_name, last_name, email, password, users.created_at as uc, users.updated_at as uu 
         FROM events 
@@ -117,6 +149,7 @@ class Event:
             }
         )
         print(f'almost there')
+        # event is returned as an instance of an object
         return event
 
     @classmethod

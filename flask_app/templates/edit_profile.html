@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <title>Profile</title>
+    <title>Edit Profile</title>
 </head>
 <body class="container">
     <nav class="navbar navbar-expand-xl navbar-expand-xl">
@@ -37,37 +37,19 @@
         </div>
         </div>
     </nav>
-    <div class="d-flex">
-        <img src="../static/avatar_img.jpeg" alt="" id="stockAvatar">
-        <h3>{{user.first_name}} {{user.last_name}}'s Profile</h3>
-    </div>
-    <div class="flex-container" id="statusBar">
-        <form action="/create_new_status" method="post">
-            <div class="form-group d-flex">
-                <textarea type="text" name="status" class="form-control" placeholder="Say something..." id="statusDash"></textarea>
+    <div class="col-6 mx-auto">
+            <form action="/user/{{user.id}}/update" method="post">
                 <input type="hidden" name="user_id" value="{{user.id}}">
-                <button type="submit" class="btn btn-success mx-2" id="btnDash">Post</button>
+            <h3>{{user.first_name}} {{user.last_name}}, Edit Your Profile!</h3>
+            <div class="form-group">
+                <label for="first_name">First Name:</label>
+                <input type="text" name="first_name" value="{{user.first_name}}" class="form-control">
             </div>
-        </form>
-        <p class="orDash my-auto ms-3">OR</p>
-        <a href="/new-event" class="createDash my-auto ms-3">Create an Event</a>
+            <div class="form-group">
+                <label for="last_name">Last Name:</label>
+                <input type="text" name="last_name" value="{{user.last_name}}" class="form-control">
+            </div>
+            <a href="/delete/{{user.id}}">DELETE YOUR PROFILE</a>
     </div>
-    <div>
-        {% for status in statuses %}
-        <p> {{status.status}} </p>
-        {% endfor %}
-    </div>
-    <div>
-        <h3>{{user.first_name}}'s Events</h3>
-        {% for event in events %}
-            {% if user.id == event.user_id %}
-            <p><strong>{{event.name}}</strong></p>
-            <p><strong>When: </strong>{{event.date}}</p>
-            <p><strong>Where: </strong>{{event.location}}</p>
-            <p><strong>Details: </strong>{{event.details}}</p>
-            {% endif %}
-        {% endfor %}
-    </div>
-    <a href="/edit-profile">edit profile</a>
 </body>
 </html>

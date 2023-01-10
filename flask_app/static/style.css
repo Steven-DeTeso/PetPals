@@ -117,6 +117,11 @@ nav{
   height: 40px;
 }
 
+#statusPostedOnDash{
+  height: 50px;
+  border: black 2px solid;
+}
+
 #statusBar {
   border-bottom: 2px solid black;
   margin-bottom: 20px;

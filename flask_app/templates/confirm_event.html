@@ -10,7 +10,7 @@
     <div>
         <h1>Are you sure you want to create this event?</h1>
         <form action="/join_event" method="post">
-            <input type="hidden" value="{{session['user_id']}}" name="user_id">
+            <input type="hidden" value="{{session['user_logged_in']['id']}}" name="user_id">
             <input type="hidden" value="{{events.id}}" name="event_id">
             <input type="submit" value="Yes.">
         </form>

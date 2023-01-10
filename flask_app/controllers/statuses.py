@@ -9,19 +9,18 @@ from flask_app.models.Status import Status, Status_getall
 
 @app.route('/create_new_status', methods=['POST'])
 def create_new_status():
-    if 'user_id' not in session:
-        print('user not in session')
-        flash("You must be logged in to edit a user's account.")
+    if 'user_logged_in' not in session:
         return redirect('/')
+    print(request.form)
     valid_status = Status.create_status(request.form)
     if valid_status:
-        print('valid status')
         return redirect('/dashboard')
+    # need an else for a different end to this function, not just redirect dashboard again. 
     return redirect('/dashboard')
 
 @app.route('/delete/<int:id>')
 def delete_status(id):
-    if 'user_id' not in session:
+    if 'user_logged_in' not in session:
         return redirect('/')
     Status_getall.delete_status({'id':id})
     return redirect('/dashboard')

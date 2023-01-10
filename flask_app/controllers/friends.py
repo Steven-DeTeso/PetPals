@@ -9,18 +9,18 @@ from flask_app.models.Status import Status
 
 @app.route('/friends')
 def view_friends():
-    if 'user_id' not in session:
+    if 'user_logged_in' not in session:
         flash("You must be logged in to edit a user's account.")
         return redirect('/')
     friends = Friend.get_all_freinds()
-    user = User.get_by_id(session['user_id'])
+    user = User.get_by_id(session['user_logged_in'])
     return render_template('friends.html', friends=friends, user=user)
 
 ### POST METHODS ###
 
 @app.route('/add_friends', methods=['POST'])
 def add_friends():
-    if 'user_id' not in session:
+    if 'user_logged_in' not in session:
         flash("You must be logged in to edit a user's account.")
         return redirect('/')
     Friend.add_friend(request.form)

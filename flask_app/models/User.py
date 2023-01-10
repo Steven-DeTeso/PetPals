@@ -32,8 +32,7 @@ class User:
     
 
     @classmethod
-    def get_by_email(cls,email):
-
+    def get_by_email(cls, email):
         data = {
             "email" : email
         }
@@ -41,7 +40,7 @@ class User:
         result = connectToMySQL(db).query_db(query,data)
         if len(result) < 1:
             return False
-        return cls(result[0])
+        return result[0]
 
     @classmethod
     def get_by_id(cls, user_id):
@@ -50,7 +49,7 @@ class User:
         result = connectToMySQL(db).query_db(query,data)
         if len(result) < 1:
             return False
-        return cls(result[0])
+        return result[0]
 
     @classmethod
     def update_user_account(cls, user_dict):
@@ -81,7 +80,7 @@ class User:
             valid = False
             flash("You need to register first!", 'login')
         else:
-            password_valid = bcrypt.check_password_hash(existing_user.password, user_input['password'])
+            password_valid = bcrypt.check_password_hash(existing_user['password'], user_input['password'])
             if not password_valid:
                 valid = False
                 flash("The password you entered is incorrect!", 'login')
@@ -138,3 +137,5 @@ class User:
         if len(user['email']) < 5:
             flash("Email address must be at least 5 characters.")
             is_valid = False
+
+        return is_valid

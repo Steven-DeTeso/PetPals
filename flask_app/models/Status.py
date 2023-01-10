@@ -62,7 +62,7 @@ class Status:
 
     # datetime column in statuses table will only take datatime data so swapping %(datetime)s to NOW() to test. Possible to remove column field.
     @classmethod
-    def create_status(cls,stat):
+    def create_status(cls, stat):
         if not cls.validate_status(stat):
             return False
         query = "INSERT INTO statuses (status, created_at, updated_at, user_id) VALUES (%(status)s, NOW(), NOW(), %(user_id)s);"
@@ -74,5 +74,6 @@ class Status:
     def validate_status(status):
         is_valid = True
         if len(status['status']) < 2:
-            flash("Status must be at least 2 characters long")
+            flash("Status must be at least 2 characters long", 'status')
             is_valid = False
+        return is_valid
