@@ -52,8 +52,8 @@
                 <p><strong>Time: </strong>{{event.time}}</p>
                 <p><strong>Where: </strong>{{event.location}}</p>
                 <p><strong>Details: </strong>{{event.details}}</p>
-                <p> {{session['user_logged_in']['id']}}
-                    {{event.user_id}}
+                <!-- <p> {{session['user_logged_in']['id']}}
+                    {{event.user_id}} -->
                     {% if session['user_logged_in']['id'] != event.user_id %}
                         {% if not event.logged_in_user_has_joined %}
                         <form action="/join_event" method="post">
