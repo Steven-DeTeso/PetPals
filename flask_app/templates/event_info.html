@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <title>Events</title>
+    <title>One Event</title>
 </head>
 <body class="container">
     <nav class="navbar navbar-expand-xl navbar-expand-xl">
@@ -41,38 +41,15 @@
         <img src="" alt="">
         <h3>{{user.first_name}} {{user.last_name}}, <a href="/new-event">Create An Event</a></h3>
     </div>
-    <div>
-        <h3><u>Events Feed</u></h3>
-        <h5>List of Events</h5>
-        {% for event in events %}
-        <div class="flexbox"> 
-            <div class="eventBox">
-                <p><strong>Name: </strong><a href="eventinfo/{{event.id}}">{{event.name}}</a></p>
-                <p><strong>Date: </strong>{{event.date}}</p>
-                <p><strong>Time: </strong>{{event.time}}</p>
-                <p><strong>Where: </strong>{{event.location}}</p>
-                <p><strong>Details: </strong>{{event.details}}</p>
-                <p> {{session['user_logged_in']['id']}}
-                    {{event.user_id}}
-                    {% if session['user_logged_in']['id'] != event.user_id %}
-                        {% if not event.logged_in_user_has_joined %}
-                        <form action="/join_event" method="post">
-                            <input type="hidden" value="{{session['user_logged_in']['id']}}" name="user_id">
-                            <input type="hidden" value="{{event.id}}" name="event_id">
-                            <input type="submit" value="Join">
-                        </form>
-                        {% else %}
-                        <form action="/leave_event" method="post">
-                            <input type="hidden" value="{{session['user_logged_in']['id']}}" name="user_id">
-                            <input type="hidden" value="{{event.id}}" name="event_id">
-                            <input type="submit" value="Leave">
-                        </form>
-                        {% endif %}
-                    {% endif %}
-                </p>
-            </div>
-        {% endfor %}
+        <div class="mx-auto mt-4" id="eventbox">
+            <p><strong>Name: </strong>{{event.name}}</a></p>
+            <p><strong>Date: </strong>{{event.date}}</p>
+            <p><strong>Time: </strong>{{event.time}}</p>
+            <p><strong>Where: </strong>{{event.location}}</p>
+            <p><strong>Details: </strong>{{event.details}}</p>
+            <p><strong>Users Going: </strong></p>
         </div>
+    <div>
     </div>
 </body>
 </html>
