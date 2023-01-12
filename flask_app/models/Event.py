@@ -189,7 +189,6 @@ class Event:
                     "updated_at": result["uu"]
             }
         )
-        print(f'almost there')
         # event is returned as an instance of an object
         return event
 

@@ -24,7 +24,10 @@ def eventinfo(event_id):
         return redirect('/')
     user = User.get_by_id(session['user_logged_in']['id'])
     event = Event.get_by_id(event_id)
-    return render_template('Event_Information.HTML', user=user, event = event)
+    # not sure why the below line isn't working?? 
+    party = Event.get_joined_users(event_id)
+    print(event_id)
+    return render_template('event_info.html', user=user, event = event, party = party)
 
 @app.route('/event-list')
 def eventlist():

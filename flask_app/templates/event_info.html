@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>One Event</title>
+</head>
+<body class="container">
+    <nav class="navbar navbar-expand-xl navbar-expand-xl">
+        <div class="container-fluid">
+            <img class="pawprint" src="static/pngwing.com.png">
+            <a class="navbar-brand logo" href="/dashboard">PetPals</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link active indiefont" aria-current="page" href="/dashboard">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link indiefont" href="/profile">Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link indiefont" href="/friends">Friends</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link indiefont" href="/event-list">Events</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link indiefont" href="/logout">Logout</a>
+            </li>
+            </ul>
+        </div>
+        </div>
+    </nav>
+    <div>
+        <img src="" alt="">
+        <h3>{{user.first_name}} {{user.last_name}}, <a href="/new-event">Create An Event</a></h3>
+    </div>
+        <div class="mx-auto mt-4" id="eventbox">
+            <p><strong>Name: </strong>{{event.name}}</a></p>
+            <p><strong>Date: </strong>{{event.date}}</p>
+            <p><strong>Time: </strong>{{event.time}}</p>
+            <p><strong>Where: </strong>{{event.location}}</p>
+            <p><strong>Details: </strong>{{event.details}}</p>
+            <p><strong>Users Going: </strong></p>
+        </div>
+    <div>
+    </div>
+</body>
+</html>
