@@ -67,9 +67,13 @@
         <div class="dash-right">
             <h3><u>{{user.first_name}}'s Upcoming Events</u></h3>
             {% for event in events %}
-            {% if session['user_logged_in']['id'] == event.user_id %}
-            <p><strong>Host: </strong>{{event.user.first_name}} {{event.user.last_name}}</p>
-            <p><strong>Name: </strong>{{event.name}}</p>
+            {% if session['user_logged_in']['first_name'] == event.user.first_name %}
+                {%for host in hosts%}
+                {% if event.id == host.id %}
+                <p><strong>Host: </strong>{{host.user.first_name}} {{host.user.last_name}}</p>
+                {% endif %}
+                {%endfor%}
+                <p><strong>Name: </strong>{{event.name}}</p>
             <p><strong>When: </strong>{{event.date}}</p>
             <p><strong>Where: </strong>{{event.location}}</p>
             <p><strong>Details: </strong>{{event.details}}</p>
