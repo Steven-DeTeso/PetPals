@@ -75,6 +75,48 @@ class Event:
             print(users_who_joined_event)
         return users_who_joined_event
 
+    @classmethod
+    def get_events_with_og_hosts(cls):
+        query = """SELECT 
+        events.id as event_id, 
+        events.created_at, 
+        events.updated_at, 
+        name,
+        date,
+        time, 
+        location, 
+        details,
+        users.id as user_id, 
+        first_name, 
+        last_name,
+        email,
+        password,
+        users.created_at as uc, 
+        users.updated_at as uu 
+        FROM events
+        LEFT JOIN users
+        ON users.id = events.user_id
+        order by event_id ASC;"""
+        events_with_hosts:list[dict] = connectToMySQL(db).query_db(query)
+        events_with_hosts_objects = []
+        for event in events_with_hosts:
+            print('RAWR')
+            for key,value in event.items():
+                print(key,'\t\t',value)
+            print('\n')
+            event_obj = cls(event)
+            event_obj.user = User.User({
+                    "id": event["user_id"],
+                    "first_name": event["first_name"],
+                    "last_name": event["last_name"],
+                    "email": event["email"],
+                    "password": event["password"],
+                    "created_at": event["uc"],
+                    "updated_at": event['uu']
+            })
+            events_with_hosts_objects.append(event_obj)
+        print ([obj.user.first_name for obj in events_with_hosts_objects])
+        return events_with_hosts_objects
 
     @classmethod
     def get_all_events(cls):
@@ -108,7 +150,6 @@ class Event:
                 if user.id == session['user_logged_in']['id']:
                     event_obj.logged_in_user_has_joined = True
             event_objects.append(event_obj)
-        # issue here with not getting 'user_id' from event creation post form. 
         print([obj.user_id for obj in event_objects])
         return event_objects
 
@@ -117,7 +158,7 @@ class Event:
     def create_valid_event(cls, event_dict):
         if not cls.is_valid(event_dict):
             return False
-        query = "INSERT INTO events (name, date, time, location, details, created_at, updated_at) VALUES (%(name)s, %(date)s, %(time)s, %(location)s, %(details)s, NOW(), NOW());"
+        query = "INSERT INTO events (name, date, time, location, details, created_at, updated_at, user_id) VALUES (%(name)s, %(date)s, %(time)s, %(location)s, %(details)s, NOW(), NOW(), %(user_id)s);"
         event_id = connectToMySQL(db).query_db(query, event_dict)
         print(event_id)
         event = cls.get_by_id(event_id)

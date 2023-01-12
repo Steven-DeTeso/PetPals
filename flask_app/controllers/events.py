@@ -36,6 +36,7 @@ def eventlist():
         return redirect('/')
     user = User.get_by_id(session['user_logged_in']['id'])
     events = Event.get_all_events()
+    hosts = Event.get_events_with_og_hosts()
     previous_event = events[0].id-1
     print('A', previous_event)
     distinct_events = []
@@ -45,7 +46,7 @@ def eventlist():
         if event.id != previous_event:
             distinct_events.append(event)
         previous_event = event.id
-    return render_template('events.html', user=user, events=distinct_events)
+    return render_template('events.html', user=user, events=distinct_events, hosts=hosts)
 
 @app.route('/confirm_event')
 def confirm_event():

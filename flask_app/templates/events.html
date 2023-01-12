@@ -47,13 +47,19 @@
         {% for event in events %}
         <div class="flexbox"> 
             <div class="eventBox">
+
+                {%for host in hosts%}
+                {% if event.id == host.id %}
+                <p><strong>Host: </strong>{{host.user.first_name}} {{host.user.last_name}}</p>
+                {% endif %}
+                {%endfor%}
                 <p><strong>Name: </strong><a href="eventinfo/{{event.id}}">{{event.name}}</a></p>
                 <p><strong>Date: </strong>{{event.date}}</p>
                 <p><strong>Time: </strong>{{event.time}}</p>
                 <p><strong>Where: </strong>{{event.location}}</p>
                 <p><strong>Details: </strong>{{event.details}}</p>
-                <p> {{session['user_logged_in']['id']}}
-                    {{event.user_id}}
+                <!-- <p> {{session['user_logged_in']['id']}}
+                    {{event.user_id}} -->
                     {% if session['user_logged_in']['id'] != event.user_id %}
                         {% if not event.logged_in_user_has_joined %}
                         <form action="/join_event" method="post">
