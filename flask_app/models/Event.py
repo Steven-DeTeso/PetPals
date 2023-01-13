@@ -51,7 +51,7 @@ class Event:
         self.joined_users = []
         self.logged_in_user_has_joined = False
 
-    def get_joined_users(self, event_id):
+    def get_joined_users(event_id):
         data = {
             'event_id': event_id
         }
