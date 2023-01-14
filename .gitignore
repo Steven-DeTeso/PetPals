@@ -7,7 +7,7 @@ __pycache__/
 *.so
 
 # Hopefully this ignores the mysqlconnection.py
-mysqlconnection.py
+flask_app/config/mysqlconnection.py
 
 # Distribution / packaging
 .Python
