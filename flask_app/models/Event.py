@@ -51,7 +51,10 @@ class Event:
         self.joined_users = []
         self.logged_in_user_has_joined = False
 
-    def get_joined_users(event_id):
+    def __repr__(self):
+        return f'Event:(name={self.name}, joined users={self.joined_users})'
+
+    def get_joined_users_not_receiving_obj(event_id):
         data = {
             'event_id': event_id
         }
@@ -66,7 +69,32 @@ class Event:
         results = connectToMySQL(db).query_db(query, data)
         users_who_joined_event = []
         for row in results:
-            print('E')
+            print('get_joined_users_not_receiving_obj(event_id)')
+            for key,value in row.items():
+                print(key,'\t\t',value)
+            print('\n')
+            joined_user_obj = User.User(row)
+            users_who_joined_event.append(joined_user_obj)
+            print(users_who_joined_event)
+        return users_who_joined_event
+
+    def get_joined_users_receiving_obj(self, event_id):
+        data = {
+            'event_id': event_id
+        }
+        print('Running query: get_joined_users_receiving_obj(self, event_id)')
+        query = """
+        SELECT * FROM
+        users
+        JOIN
+        users_events 
+        ON users.id = users_events.user_id
+        WHERE users_events.event_id = %(event_id)s;
+        """
+        results = connectToMySQL(db).query_db(query, data)
+        users_who_joined_event = []
+        for row in results:
+            print('Line 97: get_joined_users_receiving_obj nested for.loop')
             for key,value in row.items():
                 print(key,'\t\t',value)
             print('\n')
@@ -100,7 +128,7 @@ class Event:
         events_with_hosts:list[dict] = connectToMySQL(db).query_db(query)
         events_with_hosts_objects = []
         for event in events_with_hosts:
-            print('RAWR')
+            print('get_events_with_og_hosts(cls)')
             for key,value in event.items():
                 print(key,'\t\t',value)
             print('\n')
@@ -115,11 +143,16 @@ class Event:
                     "updated_at": event['uu']
             })
             events_with_hosts_objects.append(event_obj)
-        print ([obj.user.first_name for obj in events_with_hosts_objects])
+            print(f'Event name: {event_obj.name}')
+        print('Line 146: Hosts of events',[obj.user.first_name for obj in events_with_hosts_objects])
         return events_with_hosts_objects
 
     @classmethod
+    # method returns query full of multiple events because each user has a row.
+    # maybe rename get_all_events_with_users_attached()?
     def get_all_events(cls):
+        # I think this is returing multple entries unnecssarily
+        print('Running: get_all_events(cls) - Line 151')
         query = """SELECT *
         FROM events 
         LEFT JOIN users_events 
@@ -127,10 +160,11 @@ class Event:
         LEFT JOIN users 
         ON users.id = users_events.user_id
         order by event_id ASC;"""
+        print('\n')
         results:list[dict] = connectToMySQL(db).query_db(query)
         event_objects:list[Event] = []
         for event in results:
-            print('D')
+            print('iterating over events:\n')
             for key,value in event.items():
                 print(key,'\t\t',value)
             print('\n')
@@ -145,12 +179,12 @@ class Event:
                     "updated_at": event['users.updated_at']
             })
             event_id = event_obj.id
-            event_obj.joined_users = event_obj.get_joined_users(event_id)
+            event_obj.joined_users = event_obj.get_joined_users_receiving_obj(event_id)
             for user in event_obj.joined_users:
                 if user.id == session['user_logged_in']['id']:
                     event_obj.logged_in_user_has_joined = True
             event_objects.append(event_obj)
-        print([obj.user_id for obj in event_objects])
+        print('Line 185: List of events',[obj.name for obj in event_objects])
         return event_objects
 
     # This method works! It successfully adds a new event to the database. 

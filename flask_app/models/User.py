@@ -19,6 +19,9 @@ class User:
         self.password = data['password']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
+    
+    def __repr__(self):
+        return f'User: {self.first_name} {self.last_name})'
 
     @classmethod
     def get_all_users(cls):
