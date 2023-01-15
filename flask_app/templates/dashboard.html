@@ -47,21 +47,21 @@
             </div>
         </form>
         <p class="orDash my-auto ms-3">OR</p>
-        <a href="/new-event" class="createDash my-auto ms-3">Create an Event</a>
+        <a href="/new-event" class="createDash my-auto ms-3 btn btn-primary">Create an Event</a>
     </div>
     <div class="dashboard">
         <div class="dash-left justify-content-between">
             <h3 class="indiefont"><strong><u>Statuses and Events Feed</u></strong></h3>
             {% for status in statuses %}
-            <div class="d-flex align-items-center justify-content-center" id="statusPostedOnDash">
-                <div class="status-box">
+            <div class="d-flex" id="statusPostedOnDash">
+                <div class="status-head">
                     <img src="../static/avatar_img.jpeg" alt="" id="stockAvatar">
-                    <p class="user-name status-user-name"><u>{{status.first_name}} {{status.last_name}}</u> says...</p>
+                    <p class="user-name"><u>{{status.first_name}} {{status.last_name}}</u> says...</p>
                 </div>            
-                <div>
+                <div class="status-body">
                     <p>{{status.status}}</p>
                     {% if session['user_logged_in']['id'] == status.user_id %}
-                    <a href="/delete/{{status.id}}" class="btn btn-danger">Delete Status</a>
+                    <a href="/delete/{{status.id}}" class="btn btn-secondary btn-sm">Delete Status</a>
                 </div>
                 <!-- need to add in delete function if user who logged in is same as creator -->
                 {% endif %}
@@ -70,26 +70,29 @@
         </div>
         <div class="dash-right">
             <h3 class="indiefont"><strong><u>{{user.first_name}}'s Upcoming Events</u></strong></h3>
-            {% for event in events %}
-            <!-- {% if session['user_logged_in']['first_name'] == event.user.first_name %} -->
-                {%for host in hosts%}
-                {% if event.id == host.id %}
-                <p><strong>Host: </strong>{{host.user.first_name}} {{host.user.last_name}}</p>
-                {% endif %}
-                {%endfor%}
-                <p><strong>Name: </strong>{{event.name}}</p>
-            <p><strong>When: </strong>{{event.date}}</p>
-            <p><strong>Where: </strong>{{event.location}}</p>
-            <p><strong>Details: </strong>{{event.details}}</p>
-            <p>
-                <form action="/leave_event" method="post">
-                    <input type="hidden" value="{{session['user_id']}}" name="user_id">
-                    <input type="hidden" value="{{event.id}}" name="event_id">
-                    <input type="submit" value="Leave">
-                </form>
-            </p>
-            <!-- {% endif %} -->
-            {% endfor %}
+            <div class="d-flex" id="eventPostedOnDash">
+
+                {% for event in events %}
+                <!-- {% if session['user_logged_in']['first_name'] == event.user.first_name %} -->
+                    {%for host in hosts%}
+                    {% if event.id == host.id %}
+                    <p><strong>Host: </strong>{{host.user.first_name}} {{host.user.last_name}}</p>
+                    {% endif %}
+                    {%endfor%}
+                <p><strong>Event Name: </strong>{{event.name}}</p>
+                <p><strong>When: </strong>{{event.date}}</p>
+                <p><strong>Where: </strong>{{event.location}}</p>
+                <p><strong>Details: </strong>{{event.details}}</p>
+                <p>
+                    <form action="/leave_event" method="post">
+                        <input type="hidden" value="{{session['user_id']}}" name="user_id">
+                        <input type="hidden" value="{{event.id}}" name="event_id">
+                        <input type="submit" value="Leave Event">
+                    </form>
+                </p>
+                <!-- {% endif %} -->
+                {% endfor %}
+            </div>
         </div>
     </div>
     </div>
