@@ -21,10 +21,11 @@ class User:
         self.updated_at = data['updated_at']
     
     def __repr__(self):
-        return f'User: {self.first_name} {self.last_name})'
+        return f'User_object: {self.first_name} {self.last_name})'
 
     @classmethod
     def get_all_users(cls):
+        print('\nRunning Query: get_all_users()\n')
         query = "SELECT * FROM users;"
         users_data:list[dict] = connectToMySQL(db).query_db(query)
         user_objects:list[User] = []
@@ -46,8 +47,9 @@ class User:
         return result[0]
 
     @classmethod
-    def get_by_id(cls, user_id):
+    def get_by_id(cls, user_id) -> dict:
         data = {"id" : user_id}
+        print('\nUsers:Line52:Running Query: get_by_id\n')
         query = "SELECT * FROM users WHERE id = %(id)s;"
         result = connectToMySQL(db).query_db(query,data)
         if len(result) < 1:

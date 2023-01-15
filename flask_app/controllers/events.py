@@ -24,7 +24,7 @@ def eventinfo(event_id):
         return redirect('/')
     user = User.get_by_id(session['user_logged_in']['id'])
     event = Event.get_by_id(event_id)
-    party = Event.get_joined_users(event_id)
+    party = Event.get_joined_users_not_receiving_obj(event_id)
     print(event_id)
     return render_template('event_info.html', user=user, event = event, party = party)
 
@@ -35,7 +35,7 @@ def eventlist():
         return redirect('/')
     user = User.get_by_id(session['user_logged_in']['id'])
     events = Event.get_all_events()
-    hosts = Event.get_events_with_og_hosts()
+    hosts = Event.get_host_of_event()
     previous_event = events[0].id-1
     print('A', previous_event)
     distinct_events = []
@@ -53,6 +53,7 @@ def confirm_event():
         flash("You must be logged in to edit a user's account.")
         return redirect('/')
     user = User.get_by_id(session['user_logged_in']['id'])
+    # This is the only var being set that calls this Class, does it need to be? 
     events = Event_nouserid.get_most_recent_event()
     return render_template('confirm_event.html', user=user, events=events)
 
@@ -62,10 +63,9 @@ def confirm_event():
 @app.route('/event', methods=['POST'])
 def f_create_a_event():
     if 'user_logged_in' not in session:
-        # flash("You must be logged in to edit a user's account.")
         return redirect('/')
     print('Printing data entered in event form')
-    print(request.form)
+    print("Line 68 event_contr: ",request.form)
     valid_event = Event.create_valid_event(request.form)
     if not valid_event:
         return redirect('/new-event')
@@ -74,7 +74,6 @@ def f_create_a_event():
 @app.route('/join_event', methods=['POST'])
 def join_event():
     if 'user_logged_in' not in session:
-        flash("You must be logged in to edit a user's account.")
         return redirect('/')
     print(f"Priting join_event method {request.form}")
     Event.join_event(request.form)
@@ -83,7 +82,6 @@ def join_event():
 @app.route('/leave_event', methods=['POST'])
 def leave_event():
     if 'user_logged_in' not in session:
-        flash("You must be logged in to edit a user's account.")
         return redirect('/')
     Event.leave_event(request.form)
     return redirect('/event-list')

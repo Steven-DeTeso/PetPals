@@ -47,7 +47,11 @@
             <p><strong>Time: </strong>{{event.time}}</p>
             <p><strong>Where: </strong>{{event.location}}</p>
             <p><strong>Details: </strong>{{event.details}}</p>
-            <p><strong>Users Going: </strong></p>
+            <p><strong>Users Going:</strong>
+                {% for person in party %}
+                {{person.first_name}} {{person.last_name}}, 
+                {% endfor %}
+            </p>
         </div>
     <div>
     </div>

@@ -67,7 +67,7 @@
         <div class="dash-right">
             <h3><u>{{user.first_name}}'s Upcoming Events</u></h3>
             {% for event in events %}
-            {% if session['user_logged_in']['first_name'] == event.user.first_name %}
+            <!-- {% if session['user_logged_in']['first_name'] == event.user.first_name %} -->
                 {%for host in hosts%}
                 {% if event.id == host.id %}
                 <p><strong>Host: </strong>{{host.user.first_name}} {{host.user.last_name}}</p>
@@ -84,7 +84,7 @@
                     <input type="submit" value="Leave">
                 </form>
             </p>
-            {% endif %}
+            <!-- {% endif %} -->
             {% endfor %}
         </div>
     </div>

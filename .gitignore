@@ -6,7 +6,7 @@ __pycache__/
 # C extensions
 *.so
 
-# Hopefully this ignores the mysqlconnection.py
+# Hopefully this ignores the mysqlconnection.py, not sure why not working?
 flask_app/config/mysqlconnection.py
 
 # Distribution / packaging

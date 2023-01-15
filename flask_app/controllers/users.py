@@ -50,7 +50,7 @@ def dashboard():
     # print(session['user_logged_in'])
     events = Event.get_all_events()
     statuses = Status_getall.get_all_statuses()
-    hosts = Event.get_events_with_og_hosts()
+    hosts = Event.get_host_of_event()
     # print(Status_getall.get_all_statuses()[0].user_logged_in)
     return render_template('dashboard.html', user=user, events=events, statuses=statuses, hosts=hosts)
 
