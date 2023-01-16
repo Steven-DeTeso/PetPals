@@ -141,7 +141,7 @@ nav{
   background-color: rgb(227 242 253);
 }
 
-.dashboard{
+.dashboard, .profile{
   display: flex;
   flex-direction: row;
   margin-left: 25px;;
@@ -150,15 +150,14 @@ nav{
 .dash-left{
   text-align: left;
   float: left;
-  width: 50%;
+  width: 75%;
   
 }
 .dash-right{
   float: right;
-  width: 50%;
-  margin-left: 50px;
+  width: 25%;
+  margin-left: 40px;
 }
-
 .statusDashUpdates{
   background-color: rgb(227 242 253);
   border: 2px solid black;
@@ -190,5 +189,23 @@ nav{
 
 .status-body {
   margin-top: 5px;
+}
+
+/* Profile Styling */
+
+.prof-left{
+  text-align: left;
+  float: left;
+  width: 50%;
+}
+
+.prof-right{
+  float: right;
+  width: 50%;
+}
+
+#profileAvatar{
+  height: 125px;
+  width: 125px;
 }
 

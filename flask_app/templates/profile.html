@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title>Profile</title>
 </head>
-<body class="container">
+<body class="container bg-color">
     <nav class="navbar navbar-expand-xl navbar-expand-xl">
         <div class="container-fluid">
             <img class="pawprint" src="static/pngwing.com.png">
@@ -37,12 +37,12 @@
         </div>
         </div>
     </nav>
-    <div class="d-flex">
-        <img src="../static/avatar_img.jpeg" alt="" id="stockAvatar">
-        <h3>{{user.first_name}} {{user.last_name}}'s Profile</h3>
+    <div class="d-flex mt-3">
+        <img src="../static/avatar_img.jpeg" id="profileAvatar">
+        <h3 class="m-3">{{user.first_name}} {{user.last_name}}'s Profile</h3>
     </div>
     <div class="flex-container" id="statusBar">
-        <form action="/create_new_status" method="post">
+        <form action="/create_new_status" method="POST">
             <div class="form-group d-flex">
                 <textarea type="text" name="status" class="form-control" placeholder="Say something..." id="statusDash"></textarea>
                 <input type="hidden" name="user_id" value="{{user.id}}">
@@ -50,24 +50,34 @@
             </div>
         </form>
         <p class="orDash my-auto ms-3">OR</p>
-        <a href="/new-event" class="createDash my-auto ms-3">Create an Event</a>
+        <a href="/new-event" class="createDash my-auto ms-3 btn btn-primary">Create an Event</a>
+        <a href="/edit-profile">edit profile</a>
     </div>
-    <div>
-        {% for status in statuses %}
-        <p> {{status.status}} </p>
-        {% endfor %}
+    <div class="profile">
+        <div class="prof-left">
+            <h3 class="indiefont"><strong><u>Statuses</u></strong></h3>
+            {% for status in statuses %}
+            <div class="d-flex" id="statusPostedOnDash">
+                <p> {{status.status}} </p>
+                {% if session['user_logged_in']['id'] == status.user_id %}
+                <a href="/delete/{{status.id}}" class="btn btn-secondary btn-sm">Delete Status</a>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    <div class="prof-right">
+        <h3 class="indiefont"><strong><u>Events hosted by {{user.first_name}}</strong></u></h3>
+        <div class="d-flex" id="eventPostedOnDash">
+            {% for event in events %}
+                {% if user.id == event.user_id %}
+                <p><strong>{{event.name}}</strong></p>
+                <p><strong>When: </strong>{{event.date}}</p>
+                <p><strong>Where: </strong>{{event.location}}</p>
+                <p><strong>Details: </strong>{{event.details}}</p>
+                {% endif %}
+            {% endfor %}
+        </div>
     </div>
-    <div>
-        <h3>{{user.first_name}}'s Events</h3>
-        {% for event in events %}
-            {% if user.id == event.user_id %}
-            <p><strong>{{event.name}}</strong></p>
-            <p><strong>When: </strong>{{event.date}}</p>
-            <p><strong>Where: </strong>{{event.location}}</p>
-            <p><strong>Details: </strong>{{event.details}}</p>
-            {% endif %}
-        {% endfor %}
-    </div>
-    <a href="/edit-profile">edit profile</a>
+</div>
 </body>
 </html>

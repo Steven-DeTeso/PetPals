@@ -38,7 +38,6 @@
         </div>
     </nav>
     <div class="flex-container" id="statusBar">
-        <img src="" alt="">
         <form action="/create_new_status" method="POST">
             <div class="form-group d-flex">
                 <textarea type="text" name="status" class="form-control" placeholder="Say something..." id="statusDash"></textarea>
@@ -50,8 +49,8 @@
         <a href="/new-event" class="createDash my-auto ms-3 btn btn-primary">Create an Event</a>
     </div>
     <div class="dashboard">
-        <div class="dash-left justify-content-between">
-            <h3 class="indiefont"><strong><u>Statuses and Events Feed</u></strong></h3>
+        <div class="dash-left">
+            <h3 class="indiefont"><strong><u>Status Feed</u></strong></h3>
             {% for status in statuses %}
             <div class="d-flex" id="statusPostedOnDash">
                 <div class="status-head">
@@ -69,7 +68,7 @@
             {% endfor %}
         </div>
         <div class="dash-right">
-            <h3 class="indiefont"><strong><u>{{user.first_name}}'s Upcoming Events</u></strong></h3>
+            <h3 class="indiefont"><strong><u>Upcoming Events</u></strong></h3>
             <div class="d-flex" id="eventPostedOnDash">
 
                 {% for event in events %}
