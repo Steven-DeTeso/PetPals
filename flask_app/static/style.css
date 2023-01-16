@@ -35,6 +35,7 @@ nav{
 
 #stockAvatar{
   width: 50px;
+  height: 50px;
 }
 
 .indiefont{
@@ -117,9 +118,14 @@ nav{
   height: 40px;
 }
 
-#statusPostedOnDash{
-  height: 50px;
+#statusPostedOnDash, #eventPostedOnDash{
   border: black 2px solid;
+  padding: 10px;
+  margin-bottom: 20px;
+  margin-right: 20px;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(227 242 253);
 }
 
 #statusBar {
@@ -135,19 +141,30 @@ nav{
   background-color: rgb(227 242 253);
 }
 
-.dashboard{
+.dashboard, .profile{
   display: flex;
+  flex-direction: row;
+  margin-left: 25px;;
 }
 
-.dash-left, .dash-right{
-  flex: auto;
+.dash-left{
+  text-align: left;
+  float: left;
+  width: 75%;
+  
 }
-
+.dash-right{
+  float: right;
+  width: 25%;
+  margin-left: 40px;
+}
 .statusDashUpdates{
+  background-color: rgb(227 242 253);
   border: 2px solid black;
   width: 600px;
   margin: 10px;
   padding: 10px;
+  
 }
 
 .createEvent{
@@ -159,3 +176,35 @@ nav{
   background-color: rgb(227 242 253);
 }
 
+.user-name {
+  font-weight: bold;
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+
+.status-head {
+  display: flex;
+  flex-direction: row;
+}
+
+.status-body {
+  margin-top: 5px;
+}
+
+/* Profile Styling */
+
+.prof-left{
+  text-align: left;
+  float: left;
+  width: 50%;
+}
+
+.prof-right{
+  float: right;
+  width: 50%;
+}
+
+#profileAvatar{
+  height: 125px;
+  width: 125px;
+}
