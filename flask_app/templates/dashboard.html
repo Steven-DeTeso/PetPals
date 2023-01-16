@@ -73,12 +73,12 @@
 
                 {% for event in events %}
                 <!-- {% if session['user_logged_in']['first_name'] == event.user.first_name %} -->
+                <p><strong>Event Name: </strong>{{event.name}}</p>
                     {%for host in hosts%}
                     {% if event.id == host.id %}
                     <p><strong>Host: </strong>{{host.user.first_name}} {{host.user.last_name}}</p>
                     {% endif %}
                     {%endfor%}
-                <p><strong>Event Name: </strong>{{event.name}}</p>
                 <p><strong>When: </strong>{{event.date.strftime("%B %d, %Y")}}</p>
                 <p><strong>Where: </strong>{{event.location}}</p>
                 <p><strong>Details: </strong>{{event.details}}</p>
