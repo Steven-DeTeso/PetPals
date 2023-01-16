@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title>One Event</title>
 </head>
-<body class="container">
+<body class="container bg-color">
     <nav class="navbar navbar-expand-xl navbar-expand-xl">
         <div class="container-fluid">
             <img class="pawprint" src="static/pngwing.com.png">
@@ -41,7 +41,10 @@
         <img src="" alt="">
         <h3>{{user.first_name}} {{user.last_name}}, <a href="/new-event">Create An Event</a></h3>
     </div>
-        <div class="mx-auto mt-4" id="eventbox">
+    <div class="align-content-center">
+        <h2 class="indiefont mx-auto"><strong><u>Event Details</u></strong></h2>
+    </div>
+    <div class="mx-auto mt-4" id="eventbox">
             <p><strong>Name: </strong>{{event.name}}</a></p>
             <p><strong>Date: </strong>{{event.date}}</p>
             <p><strong>Time: </strong>{{event.time}}</p>

@@ -79,7 +79,7 @@
                     {% endif %}
                     {%endfor%}
                 <p><strong>Event Name: </strong>{{event.name}}</p>
-                <p><strong>When: </strong>{{event.date}}</p>
+                <p><strong>When: </strong>{{event.date.strftime("%B %d, %Y")}}</p>
                 <p><strong>Where: </strong>{{event.location}}</p>
                 <p><strong>Details: </strong>{{event.details}}</p>
                 <p>

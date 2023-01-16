@@ -40,7 +40,9 @@
     <div class="container">
         <div class="d-flex mt-3">
             <img src="../static/avatar_img.jpeg" id="profileAvatar">
-            <h3 class="m-3">{{user.first_name}} {{user.last_name}}'s Profile</h3>
+        </div>
+        <div class=" d-flex m-3">
+            <h3 class="">{{user.first_name}} {{user.last_name}}'s Profile</h3>
         </div>
         <div class="flex-container" id="statusBar">
             <form action="/create_new_status" method="POST">
@@ -76,7 +78,7 @@
             {% for event in events %}
                 {% if user.id == event.user_id %}
                 <p><strong>{{event.name}}</strong></p>
-                <p><strong>When: </strong>{{event.date}}</p>
+                <p><strong>When: </strong>{{event.date.strftime("%B %d, %Y")}}</p>
                 <p><strong>Where: </strong>{{event.location}}</p>
                 <p><strong>Details: </strong>{{event.details}}</p>
                 {% endif %}
