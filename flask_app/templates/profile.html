@@ -37,21 +37,26 @@
         </div>
         </div>
     </nav>
-    <div class="d-flex mt-3">
-        <img src="../static/avatar_img.jpeg" id="profileAvatar">
-        <h3 class="m-3">{{user.first_name}} {{user.last_name}}'s Profile</h3>
-    </div>
-    <div class="flex-container" id="statusBar">
-        <form action="/create_new_status" method="POST">
-            <div class="form-group d-flex">
-                <textarea type="text" name="status" class="form-control" placeholder="Say something..." id="statusDash"></textarea>
-                <input type="hidden" name="user_id" value="{{user.id}}">
-                <button type="submit" class="btn btn-success mx-2" id="btnDash">Post</button>
+    <div class="container">
+        <div class="d-flex mt-3">
+            <img src="../static/avatar_img.jpeg" id="profileAvatar">
+            <h3 class="m-3">{{user.first_name}} {{user.last_name}}'s Profile</h3>
+        </div>
+        <div class="flex-container" id="statusBar">
+            <form action="/create_new_status" method="POST">
+                <div class="form-group d-flex">
+                    <textarea type="text" name="status" class="form-control" placeholder="Say something..." id="statusDash"></textarea>
+                    <input type="hidden" name="user_id" value="{{user.id}}">
+                    <button type="submit" class="btn btn-success mx-2" id="btnDash">Post</button>
+                </div>
+            </form>
+            <p class="orDash my-auto ms-3">OR</p>
+            <a href="/new-event" class="createDash my-auto ms-3 btn btn-primary">Create an Event</a>
+            <div>
+                <a href="/edit-profile" class="m-5">edit profile</a>
             </div>
-        </form>
-        <p class="orDash my-auto ms-3">OR</p>
-        <a href="/new-event" class="createDash my-auto ms-3 btn btn-primary">Create an Event</a>
-        <a href="/edit-profile">edit profile</a>
+        </div>
+
     </div>
     <div class="profile">
         <div class="prof-left">
