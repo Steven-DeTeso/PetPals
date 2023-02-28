@@ -64,9 +64,9 @@
         <div class="prof-left">
             <h3 class="indiefont"><strong><u>Statuses</u></strong></h3>
             {% for status in statuses %}
+            {% if session['user_logged_in']['id'] == status.user_id %}
             <div class="d-flex" id="statusPostedOnDash">
                 <p> {{status.status}} </p>
-                {% if session['user_logged_in']['id'] == status.user_id %}
                 <a href="/delete/{{status.id}}" class="btn btn-secondary btn-sm">Delete Status</a>
                 {% endif %}
             </div>

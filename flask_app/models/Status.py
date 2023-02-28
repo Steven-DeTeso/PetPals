@@ -16,6 +16,7 @@ class Status_getall:
 
     @classmethod
     def get_all_statuses(cls):
+        print('\nStatusModel:Line19 get_all_statuses\n')
         query = """SELECT * FROM statuses
         JOIN users on users.id = statuses.user_id
         ORDER BY statuses.id DESC;"""

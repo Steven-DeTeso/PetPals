@@ -122,10 +122,8 @@ class Event:
         events_with_hosts:list[dict] = connectToMySQL(db).query_db(query)
         events_with_hosts_objects = []
         for event in events_with_hosts:
-            print('HOSTS IN ORDER BY ID')
             for key,value in event.items():
                 print(key,'\t\t',value)
-            # print('\n')
             event_obj = cls(event)
             event_obj.user = User.User({
                     "id": event["user_id"],
@@ -148,7 +146,7 @@ class Event:
     # maybe rename get_all_events_with_users_attached()?
     def get_all_events(cls):
         # I think this is returing multple entries unnecssarily
-        print('\nEvent:Line148: Running Query: get_all_events(cls)\n')
+        print('\nEvent:Line51: Running Query: get_all_events(cls)\n')
         query = """SELECT *
         FROM events 
         LEFT JOIN users_events 
@@ -180,7 +178,7 @@ class Event:
                 if user.id == session['user_logged_in']['id']:
                     event_obj.logged_in_user_has_joined = True
             event_objects.append(event_obj)
-        print('Event:Line 180: List of events',[obj.name for obj in event_objects])
+        print('\nEvent:Line 183: List of events\n',[obj.name for obj in event_objects])
         return event_objects
 
 

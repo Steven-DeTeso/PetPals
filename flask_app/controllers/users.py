@@ -22,8 +22,6 @@ def r_register_user():
     if not valid_user:
         return redirect('/')
     session['user_logged_in'] = valid_user
-    print('Printing:', session['user_logged_in'])
-    print('Printing:', session['user_logged_in']['id'])
     return redirect('/dashboard')
 
 
@@ -46,12 +44,9 @@ def dashboard():
         flash("You must be logged in to edit a user's account.")
         return redirect('/')
     user = User.get_by_id(session['user_logged_in']['id'])
-    # print("session id right below")
-    # print(session['user_logged_in'])
     events = Event.get_all_events()
     statuses = Status_getall.get_all_statuses()
     hosts = Event.get_host_of_event()
-    # print(Status_getall.get_all_statuses()[0].user_logged_in)
     return render_template('dashboard.html', user=user, events=events, statuses=statuses, hosts=hosts)
 
 @app.route('/profile')

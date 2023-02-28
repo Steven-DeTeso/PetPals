@@ -49,10 +49,9 @@ class User:
     @classmethod
     def get_by_id(cls, user_id) -> dict:
         data = {"id" : user_id}
-        print('\nUsers:Line52:Running Query: get_by_id\n')
+        print('\nUsersModel:Line52:Running Query: get_by_id\n')
         query = "SELECT * FROM users WHERE id = %(id)s;"
         result = connectToMySQL(db).query_db(query,data)
-        print(result)
         if len(result) < 1:
             return False
         return result[0]
@@ -74,6 +73,7 @@ class User:
         user['password'] = pw_hash
         query = "INSERT INTO users (first_name, last_name, email, password, created_at, updated_at) VALUES (%(first_name)s, %(last_name)s, %(email)s, %(password)s, NOW(), NOW());"
         new_user_id = connectToMySQL(db).query_db(query, user)
+        print('UserModel:Line76: create_user')
         new_user = cls.get_by_id(new_user_id)
         return new_user
 
@@ -99,6 +99,7 @@ class User:
     def validate_user(user):
         is_valid = True
         query = "SELECT * FROM users WHERE email = %(email)s;"
+        print("\nUsersModelLine101: validate_user\n")
         result = connectToMySQL(db).query_db(query,user)
         if len(result) >= 1:
             flash("Email already in use. Please Log In.", 'register')
