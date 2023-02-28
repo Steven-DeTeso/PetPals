@@ -52,6 +52,7 @@ class User:
         print('\nUsers:Line52:Running Query: get_by_id\n')
         query = "SELECT * FROM users WHERE id = %(id)s;"
         result = connectToMySQL(db).query_db(query,data)
+        print(result)
         if len(result) < 1:
             return False
         return result[0]

@@ -1,5 +1,5 @@
 from flask_app import app
-from flask import Flask, render_template, redirect, request, session, flash
+from flask import Flask, render_template, redirect, request, session, flash, url_for
 from flask_app.models.User import User
 from flask_app.models.Event import Event
 from flask_app.models.Friend import Friend
@@ -12,8 +12,8 @@ def view_friends():
     if 'user_logged_in' not in session:
         flash("You must be logged in to edit a user's account.")
         return redirect('/')
-    friends = Friend.get_all_freinds()
-    user = User.get_by_id(session['user_logged_in'])
+    friends = Friend.get_all_freinds_of_user(session['user_logged_in']['id'])
+    user = User.get_by_id(session['user_logged_in']['id'])
     return render_template('friends.html', friends=friends, user=user)
 
 ### POST METHODS ###

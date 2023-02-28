@@ -39,13 +39,13 @@
     </nav>
     <div>
         <img src="" alt="">
-        <h3><u>{{user.first_name}} {{user.last_name}}'s friends</u></h3>
+        <h3><u> {{user.first_name}}'s friends</u></h3>
     </div>
     <div>
         {% for friend in friends %}
         <ul>
             <li><img src="../static/avatar_img.jpeg" alt="" id="stockAvatar">
-                {{user.friend.first_name}} {{user.friend.last_name}}</li>
+                {{friend.first_name}} {{friend.last_name}}</li>
         </ul>
         {% endfor %}
     </div>
